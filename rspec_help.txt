@@ -1,0 +1,60 @@
+Usage: rspec [options] [files or directories]
+
+    -I PATH                          Specify PATH to add to $LOAD_PATH (may be used more than once).
+    -r, --require PATH               Require a file.
+    -O, --options PATH               Specify the path to a custom options file.
+        --order TYPE[:SEED]          Run examples by the specified order type.
+                                       [default] files are ordered based on the underlying file
+                                                 system's order
+                                       [rand]    randomize the order of files, groups and examples
+                                       [random]  alias for rand
+                                       [random:SEED] e.g. --order random:123
+        --seed SEED                  Equivalent of --order rand:SEED.
+    -d, --debugger                   Enable debugging.
+        --fail-fast                  Abort the run on first failure.
+        --failure-exit-code CODE     Override the exit code used when there are failing specs.
+    -X, --[no-]drb                   Run examples via DRb.
+        --drb-port PORT              Port to connect to the DRb server.
+        --init                       Initialize your project with RSpec.
+        --configure                  Deprecated. Use --init instead.
+
+  **** Output ****
+
+    -f, --format FORMATTER           Choose a formatter.
+                                       [p]rogress (default - dots)
+                                       [d]ocumentation (group and example names)
+                                       [h]tml
+                                       [t]extmate
+                                       [j]son
+                                       custom formatter class name
+    -o, --out FILE                   Write output to a file instead of STDOUT. This option applies
+                                       to the previously specified --format, or the default format
+                                       if no format is specified.
+    -b, --backtrace                  Enable full backtrace.
+    -c, --[no-]color, --[no-]colour  Enable color in the output.
+    -p, --[no-]profile [COUNT]       Enable profiling of examples and list the slowest examples (default: 10).
+
+  **** Filtering/tags ****
+
+    In addition to the following options for selecting specific files, groups,
+    or examples, you can select a single example by appending the line number to
+    the filename:
+
+      rspec path/to/a_spec.rb:37
+
+    -P, --pattern PATTERN            Load files matching pattern (default: "spec/**/*_spec.rb").
+    -e, --example STRING             Run examples whose full nested names include STRING (may be
+                                       used more than once)
+    -l, --line-number LINE           Specify line number of an example or group (may be
+                                       used more than once).
+    -t, --tag TAG[:VALUE]            Run examples with the specified tag, or exclude examples
+                                     by adding ~ before the tag.
+                                       - e.g. ~slow
+                                       - TAG is always converted to a symbol
+        --default-path PATH          Set the default path where RSpec looks for examples (can
+                                       be a path to a file or a directory).
+
+  **** Utility ****
+
+    -v, --version                    Display the version.
+    -h, --help                       You're looking at it.
