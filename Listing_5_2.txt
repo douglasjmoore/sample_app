@@ -1,0 +1,32 @@
+
+Listing 5.2. The Home page with a link to the signup page.
+app/views/static_pages/home.html.erb
+
+<div class="center hero-unit">
+  <h1>Welcome to the Sample App</h1>
+
+  <h2>
+    This is the home page for the
+    <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+    sample application.
+  </h2>
+
+  <%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
+</div>
+
+<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+
+In preparation for adding users to our site in Chapter 7, the first link_to creates a stub link of the form
+
+<a href="#" class="btn btn-large btn-primary">Sign up now!</a>
+
+FROM
+<% provide(:title, 'Sample App Home') %>
+<h1>Sample App</h1>
+<p>
+  This is the home page for the
+  <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+  sample application.
+</p>
+<p>Find me in app/views/static_pages/home.html.erb after Listing 3.27 and Chapter 4.1</p>
+
