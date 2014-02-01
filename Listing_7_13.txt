@@ -1,4 +1,7 @@
-##Listing 7.13
+
+#Listing 7.13. Defining a gravatar_for helper method.
+subl app/helpers/users_helper.rb
+
 module UsersHelper
 
   # Returns the Gravatar (http://gravatar.com/) for the given user.

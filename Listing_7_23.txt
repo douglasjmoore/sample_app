@@ -1,0 +1,18 @@
+
+Listing 7.23. Code to display error messages on the signup form.
+subl app/views/users/new.html.erb
+
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@user) do |f| %>
+      <%= render 'shared/error_messages' %>
+      .
+      .
+      .
+    <% end %>
+  </div>
+</div>
+

@@ -1,11 +1,13 @@
+
+Listing 7.17. A form to sign up new users.
+app/views/users/new.html.erb
+
 <% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
 
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(@user) do |f| %>
-    
-      <%= render 'shared/error_messages' %>
 
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -23,4 +25,4 @@
     <% end %>
   </div>
 </div>
-<p>Find me in app/views/users/new.html.erb</p>
+

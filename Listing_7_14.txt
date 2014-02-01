@@ -1,0 +1,16 @@
+
+#Listing 7.14. Adding a sidebar to the user show view.
+#subl app/views/users/show.html.erb
+
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
