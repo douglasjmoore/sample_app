@@ -1,0 +1,17 @@
+
+Listing 7.33. The flash ERb in the site layout using content_tag.
+subl app/views/layouts/application.html.erb
+
+<!DOCTYPE html>
+<html>
+      .
+      .
+      .
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+      .
+      .
+      .
+</html>
+
