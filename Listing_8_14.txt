@@ -1,0 +1,9 @@
+
+Listing 8.14. Including the Sessions helper module into the Application controller.
+subl app/controllers/application_controller.rb
+
+class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  include SessionsHelper
+end
+

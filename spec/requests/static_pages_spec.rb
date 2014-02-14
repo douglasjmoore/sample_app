@@ -20,10 +20,10 @@ describe "Static pages" do
       expect(page).to have_title(full_title(''))
       click_link "Sign up now!"
       expect(page).to have_title(full_title('Sign up'))
-      click_link "sample app"
-      expect(page).to have_title(full_title('Sign up'))
       click_link "Sign in"
-      expect(page).to have_title(full_title('Sign up'))
+      expect(page).to have_title(full_title('Sign in'))
+      click_link "sample app"
+      expect(page).to have_title(full_title(''))
     end
 
   describe "Home page" do
@@ -57,10 +57,10 @@ describe "Static pages" do
         expect(page).to have_title(full_title(''))
         click_link "Sign up now!"
         expect(page).to have_title(full_title('Sign up'))
-        click_link "sample app"
-        expect(page).to have_title(full_title('Sign up'))
         click_link "Sign in"
-        expect(page).to have_title(full_title('Sign up'))
+        expect(page).to have_title(full_title('Sign in'))
+        click_link "sample app"
+        expect(page).to have_title(full_title(''))
       end
 
 
@@ -81,9 +81,9 @@ describe "Static pages" do
         click_link "Help"
         expect(page).to have_title(full_title('Help'))
         click_link "sample app"
-        expect(page).to have_title(full_title('Help'))
+        expect(page).to have_title(full_title(''))
         click_link "Sign in"
-        expect(page).to have_title(full_title('Help'))
+        expect(page).to have_title(full_title('Sign in'))
         click_link "Home"
         expect(page).to have_title(full_title(''))
         click_link "Sign up now!"
@@ -118,9 +118,9 @@ describe "Static pages" do
         click_link "Contact"
         expect(page).to have_title(full_title('Contact'))
         click_link "sample app"
-        expect(page).to have_title(full_title('Contact'))
+        expect(page).to have_title(full_title(''))
         click_link "Sign in"
-        expect(page).to have_title(full_title('Contact'))
+        expect(page).to have_title(full_title('Sign in'))
       end
   end
 
@@ -139,12 +139,12 @@ describe "Static pages" do
       it "should have the right links on the layout" do
         click_link "Home"
         expect(page).to have_title(full_title(''))
+        click_link "Sign up now!"
+        expect(page).to have_title(full_title('Sign up'))
         click_link "sample app"
         expect(page).to have_title(full_title(''))
         click_link "Sign in"
-        expect(page).to have_title(full_title(''))
-        click_link "Sign up now!"
-        expect(page).to have_title(full_title('Sign up'))
+        expect(page).to have_title(full_title('Sign in'))
         click_link "About"
         expect(page).to have_title(full_title('About Us'))
         click_link "Contact"

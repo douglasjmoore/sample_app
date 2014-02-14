@@ -1,0 +1,16 @@
+
+Listing 8.9. A preliminary version of the Sessions create action.
+subl app/controllers/sessions_controller.rb
+
+class SessionsController < ApplicationController
+  .
+  .
+  .
+  def create
+    render 'new'
+  end
+  .
+  .
+  .
+end
+

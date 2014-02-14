@@ -1,0 +1,17 @@
+
+Listing 8.20. Defining assignment to current_user.
+subl app/helpers/sessions_helper.rb
+
+module SessionsHelper
+
+  def sign_in(user)
+    .
+    .
+    .
+  end
+
+  def current_user=(user)
+    @current_user = user
+  end
+end
+

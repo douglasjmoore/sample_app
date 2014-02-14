@@ -1,0 +1,17 @@
+
+Listing 8.31. Adding the cucumber-rails gem to the Gemfile.
+subl Gemfile
+.
+.
+.
+group :test do
+  .
+  .
+  .
+  gem 'cucumber-rails', '1.4.0', :require => false
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
+end
+.
+.
+.
+

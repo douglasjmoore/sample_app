@@ -1,0 +1,18 @@
+
+Listing 8.15. A first test for the remember token.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
+  it { should respond_to(:authenticate) }
+  .
+  .
+  .
+end
+

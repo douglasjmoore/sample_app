@@ -1,3 +1,7 @@
+
+Listing 8.24. Changing the layout links for signed-in users.
+subl app/views/layouts/_header.html.erb
+
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
@@ -29,3 +33,5 @@
     </div>
   </div>
 </header>
+
+The dropdown menu requires

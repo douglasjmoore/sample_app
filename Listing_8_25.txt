@@ -1,0 +1,10 @@
+
+Listing 8.25. Adding the Bootstrap JavaScript library to application.js.
+subl app/assets/javascripts/application.js
+
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+//= require turbolinks
+//= require_tree .
+

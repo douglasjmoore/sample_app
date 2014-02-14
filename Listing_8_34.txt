@@ -1,3 +1,7 @@
+
+Listing 8.34. Adding a helper method and a custom RSpec matcher.
+spec/support/utilities.rb
+
 include ApplicationHelper
 
 def valid_signin(user)
@@ -12,12 +16,16 @@ RSpec::Matchers.define :have_error_message do |message|
   end
 end
 
+LATER
 
-#def full_title(page_title)
-#  base_title = "Ruby on Rails Tutorial Sample App"
-#  if page_title.empty?
-#    base_title
-#  else
-#    "#{base_title} | #{page_title}"
-#  end
-#end
+it { should have_error_message('Invalid') }
+
+and
+
+describe "with valid information" do
+  let(:user) { FactoryGirl.create(:user) }
+  before { valid_signin(user) }
+  .
+  .
+  .
+

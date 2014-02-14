@@ -1,0 +1,5 @@
+Listing 8.4. The initial signin view.
+subl app/views/sessions/new.html.erb 
+
+<% provide(:title, "Sign in") %>
+<h1>Sign in</h1>

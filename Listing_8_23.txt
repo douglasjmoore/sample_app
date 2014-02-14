@@ -1,0 +1,21 @@
+
+Listing 8.23. The signed_in? helper method.
+subl app/helpers/sessions_helper.rb
+
+module SessionsHelper
+
+  def sign_in(user)
+    remember_token = User.new_remember_token
+    cookies.permanent[:remember_token] = remember_token
+    user.update_attribute(:remember_token, User.encrypt(remember_token))
+    self.current_user = user
+  end
+
+  def signed_in?
+    !current_user.nil?
+  end
+  .
+  .
+  .
+end
+
