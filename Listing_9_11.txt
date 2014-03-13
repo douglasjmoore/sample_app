@@ -1,0 +1,59 @@
+Listing 9.11. Testing that the edit and update actions are protected. 
+subl spec/requests/authentication_pages_spec.rb
+require 'spec_helper'
+
+describe "Authentication" do
+  .
+  .
+  .
+  describe "authorization" do
+
+    describe "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "in the Users controller" do
+
+        describe "visiting the edit page" do
+          before { visit edit_user_path(user) }
+          it { should have_title('Sign in') }
+        end
+
+        describe "submitting to the update action" do
+          before { patch user_path(user) }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+      end
+    end
+  end
+end
+
+
+Failures:
+
+  1) Authentication authorization for non-signed-in users in the Users controller visiting the edit page 
+     Failure/Error: it { should have_title('Sign in') }
+       expected #has_title?("Sign in") to return true, got false
+     # ./spec/requests/authentication_pages_spec.rb:63:in `block (6 levels) in <top (required)>'
+
+  2) Authentication authorization for non-signed-in users in the Users controller submitting to the update action 
+     Failure/Error: before { patch user_path(user) }
+     ActionController::ParameterMissing:
+       param not found: user
+     # ./app/controllers/users_controller.rb:46:in `user_params'
+     # ./app/controllers/users_controller.rb:35:in `update'
+     # ./spec/requests/authentication_pages_spec.rb:67:in `block (6 levels) in <top (required)>'
+
+  3) User pages edit with valid information 
+     Failure/Error: it { should have_link('Sign out', href: signout_path) }
+       expected #has_link?("Sign out", {:href=>"/signout"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+Finished in 2.43 seconds
+92 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:63 # Authentication authorization for non-signed-in users in the Users controller visiting the edit page 
+rspec ./spec/requests/authentication_pages_spec.rb:68 # Authentication authorization for non-signed-in users in the Users controller submitting to the update action 
+rspec ./spec/requests/user_pages_spec.rb:100 # User pages edit with valid information 
+

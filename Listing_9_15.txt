@@ -1,0 +1,634 @@
+
+Listing 9.15. The current_user? method.
+subl app/helpers/sessions_helper.rb
+
+module SessionsHelper
+  .
+  .
+  .
+  def current_user
+    remember_token = User.hash(cookies[:remember_token])
+    @current_user ||= User.find_by(remember_token: remember_token)
+  end
+
+  def current_user?(user)
+    user == current_user
+  end
+  .
+  .
+  .
+end
+
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  32) Authentication signin with invalid information after visiting another page 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  33) Authentication signin with valid information 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  34) Authentication signin with valid information 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  35) Authentication signin with valid information 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  36) Authentication signin with valid information 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  37) Authentication signin with valid information 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  38) Authentication signin with valid information followed by signout 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  39) Authentication signin page 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:8:in `block (3 levels) in <top (required)>'
+
+  40) Authentication signin page 
+     Failure/Error: before { visit signin_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/authentication_pages_spec.rb:8:in `block (3 levels) in <top (required)>'
+
+  41) Static pages should have the right links on the layout
+     Failure/Error: visit root_path
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:12:in `block (2 levels) in <top (required)>'
+
+  42) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  43) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  44) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  45) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  46) Static pages Home page should have the right links on the layout
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  47) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  48) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  49) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  50) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  51) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  52) Static pages Home page 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  53) Static pages Home page it should behave like all static pages 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:34
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  54) Static pages Home page it should behave like all static pages 
+     Failure/Error: before { visit root_path }  # it is like before(:each)
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:34
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+  55) Static pages About page should have the right links on the layout
+     Failure/Error: before { visit about_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  56) Static pages About page 
+     Failure/Error: before { visit about_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  57) Static pages About page 
+     Failure/Error: before { visit about_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  58) Static pages About page it should behave like all static pages 
+     Failure/Error: before { visit about_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:103
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  59) Static pages About page it should behave like all static pages 
+     Failure/Error: before { visit about_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:103
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:99:in `block (3 levels) in <top (required)>'
+
+  60) Static pages Help page should have the right links on the layout
+     Failure/Error: before { visit help_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:70:in `block (3 levels) in <top (required)>'
+
+  61) Static pages Help page 
+     Failure/Error: before { visit help_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:70:in `block (3 levels) in <top (required)>'
+
+  62) Static pages Help page 
+     Failure/Error: before { visit help_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:70:in `block (3 levels) in <top (required)>'
+
+  63) Static pages Help page it should behave like all static pages 
+     Failure/Error: before { visit help_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:74
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:70:in `block (3 levels) in <top (required)>'
+
+  64) Static pages Help page it should behave like all static pages 
+     Failure/Error: before { visit help_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:74
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:70:in `block (3 levels) in <top (required)>'
+
+  65) Static pages Contact page should have the right links on the layout
+     Failure/Error: before { visit contact_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:128:in `block (3 levels) in <top (required)>'
+
+  66) Static pages Contact page 
+     Failure/Error: before { visit contact_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:128:in `block (3 levels) in <top (required)>'
+
+  67) Static pages Contact page 
+     Failure/Error: before { visit contact_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:128:in `block (3 levels) in <top (required)>'
+
+  68) Static pages Contact page it should behave like all static pages 
+     Failure/Error: before { visit contact_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:132
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:128:in `block (3 levels) in <top (required)>'
+
+  69) Static pages Contact page it should behave like all static pages 
+     Failure/Error: before { visit contact_path }
+     ActionView::Template::Error:
+       wrong number of arguments (1 for 0)
+     Shared Example Group: "all static pages" called from ./spec/requests/static_pages_spec.rb:132
+     # ./app/helpers/sessions_helper.rb:15:in `hash'
+     # ./app/helpers/sessions_helper.rb:15:in `current_user'
+     # ./app/helpers/sessions_helper.rb:11:in `signed_in?'
+     # ./app/views/layouts/_header.html.erb:9:in `_app_views_layouts__header_html_erb___174669168_83795920'
+     # ./app/views/layouts/application.html.erb:12:in `_app_views_layouts_application_html_erb___592789050_84040310'
+     # ./spec/requests/static_pages_spec.rb:128:in `block (3 levels) in <top (required)>'
+
+Finished in 1.17 seconds
+95 examples, 69 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:103 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:102 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:100 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:98 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:99 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:101 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:84 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:78 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:77 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:76 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:30 # User pages signup page 
+rspec ./spec/requests/user_pages_spec.rb:29 # User pages signup page 
+rspec ./spec/requests/user_pages_spec.rb:28 # User pages signup page 
+rspec ./spec/requests/user_pages_spec.rb:56 # User pages signup page with valid information should create a user
+rspec ./spec/requests/user_pages_spec.rb:66 # User pages signup page with valid information after saving the user 
+rspec ./spec/requests/user_pages_spec.rb:65 # User pages signup page with valid information after saving the user 
+rspec ./spec/requests/user_pages_spec.rb:64 # User pages signup page with valid information after saving the user 
+rspec ./spec/requests/user_pages_spec.rb:34 # User pages signup page with invalid information should not create a user
+rspec ./spec/requests/user_pages_spec.rb:42 # User pages signup page with invalid information after submission 
+rspec ./spec/requests/user_pages_spec.rb:43 # User pages signup page with invalid information after submission 
+rspec ./spec/requests/user_pages_spec.rb:8 # User pages signup page it should behave like all user pages 
+rspec ./spec/requests/user_pages_spec.rb:9 # User pages signup page it should behave like all user pages 
+rspec ./spec/requests/user_pages_spec.rb:16 # User pages profile page 
+rspec ./spec/requests/user_pages_spec.rb:17 # User pages profile page 
+rspec ./spec/requests/authentication_pages_spec.rb:63 # Authentication authorization for non-signed-in users in the Users controller visiting the edit page 
+rspec ./spec/requests/authentication_pages_spec.rb:68 # Authentication authorization for non-signed-in users in the Users controller submitting to the update action 
+rspec ./spec/requests/authentication_pages_spec.rb:80 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:81 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:86 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+rspec ./spec/requests/authentication_pages_spec.rb:20 # Authentication signin with invalid information 
+rspec ./spec/requests/authentication_pages_spec.rb:23 # Authentication signin with invalid information 
+rspec ./spec/requests/authentication_pages_spec.rb:27 # Authentication signin with invalid information after visiting another page 
+rspec ./spec/requests/authentication_pages_spec.rb:45 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:43 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:41 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:44 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:42 # Authentication signin with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:49 # Authentication signin with valid information followed by signout 
+rspec ./spec/requests/authentication_pages_spec.rb:10 # Authentication signin page 
+rspec ./spec/requests/authentication_pages_spec.rb:11 # Authentication signin page 
+rspec ./spec/requests/static_pages_spec.rb:11 # Static pages should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:40 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:39 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:41 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:46 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:49 # Static pages Home page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:47 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:45 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:43 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:44 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:48 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:38 # Static pages Home page 
+rspec ./spec/requests/static_pages_spec.rb:7 # Static pages Home page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:8 # Static pages Home page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:109 # Static pages About page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:108 # Static pages About page 
+rspec ./spec/requests/static_pages_spec.rb:107 # Static pages About page 
+rspec ./spec/requests/static_pages_spec.rb:7 # Static pages About page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:8 # Static pages About page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:80 # Static pages Help page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:79 # Static pages Help page 
+rspec ./spec/requests/static_pages_spec.rb:78 # Static pages Help page 
+rspec ./spec/requests/static_pages_spec.rb:7 # Static pages Help page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:8 # Static pages Help page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:139 # Static pages Contact page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:138 # Static pages Contact page 
+rspec ./spec/requests/static_pages_spec.rb:137 # Static pages Contact page 
+rspec ./spec/requests/static_pages_spec.rb:7 # Static pages Contact page it should behave like all static pages 
+rspec ./spec/requests/static_pages_spec.rb:8 # Static pages Contact page it should behave like all static pages 
+
+Randomized with seed 64297
+
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ 
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ 
+
+
+
+Failures:
+
+  1) User pages edit page 
+     Failure/Error: it { should have_content("Update your profile") }
+       expected #has_content?("Update your profile") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:76:in `block (4 levels) in <top (required)>'
+
+  2) User pages edit page 
+     Failure/Error: it { should have_title("Edit user") }
+       expected #has_title?("Edit user") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:77:in `block (4 levels) in <top (required)>'
+
+  3) User pages edit page 
+     Failure/Error: it { should have_link('change', href: 'http://gravatar.com/emails') }
+       expected #has_link?("change", {:href=>"http://gravatar.com/emails"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:78:in `block (4 levels) in <top (required)>'
+
+  4) User pages edit with invalid information 
+     Failure/Error: before { click_button "Save changes" }
+     Capybara::ElementNotFound:
+       Unable to find button "Save changes"
+     # ./spec/requests/user_pages_spec.rb:82:in `block (4 levels) in <top (required)>'
+
+  5) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+  6) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+  7) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+  8) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+  9) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+  10) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+  11) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:76:in `block (4 levels) in <top (required)>'
+
+  12) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:76:in `block (4 levels) in <top (required)>'
+
+  13) Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:76:in `block (4 levels) in <top (required)>'
+
+Finished in 2.35 seconds
+95 examples, 13 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:76 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:77 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:78 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:84 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:102 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:100 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:103 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:98 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:101 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:99 # User pages edit with valid information 
+rspec ./spec/requests/authentication_pages_spec.rb:80 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:81 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:86 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+
+Randomized with seed 32866

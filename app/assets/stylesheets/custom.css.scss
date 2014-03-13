@@ -203,6 +203,24 @@ input {
 
 /* listing 7.25 end */
 
+/* listing 9.25 start */
 
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+
+/* listing 9.25 end */
 
 

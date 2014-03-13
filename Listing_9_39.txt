@@ -1,0 +1,139 @@
+
+Listing 9.39. The migration to add a boolean admin attribute to users.
+db/migrate/[timestamp]_add_admin_to_users.rb
+
+class AddAdminToUsers < ActiveRecord::Migration
+  def change
+    add_column :users, :admin, :boolean, default: false
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Failures:
+
+  1) User pages edit with invalid information 
+     Failure/Error: before { click_button "Save changes" }
+     Capybara::ElementNotFound:
+       Unable to find button "Save changes"
+     # ./spec/requests/user_pages_spec.rb:104:in `block (4 levels) in <top (required)>'
+
+  2) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:110:in `block (4 levels) in <top (required)>'
+
+  3) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:110:in `block (4 levels) in <top (required)>'
+
+  4) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:110:in `block (4 levels) in <top (required)>'
+
+  5) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:110:in `block (4 levels) in <top (required)>'
+
+  6) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:110:in `block (4 levels) in <top (required)>'
+
+  7) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:110:in `block (4 levels) in <top (required)>'
+
+  8) User pages edit page 
+     Failure/Error: it { should have_title("Edit user") }
+       expected #has_title?("Edit user") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:99:in `block (4 levels) in <top (required)>'
+
+  9) User pages edit page 
+     Failure/Error: it { should have_link('change', href: 'http://gravatar.com/emails') }
+       expected #has_link?("change", {:href=>"http://gravatar.com/emails"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  10) User pages edit page 
+     Failure/Error: it { should have_content("Update your profile") }
+       expected #has_content?("Update your profile") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:98:in `block (4 levels) in <top (required)>'
+
+  11) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  12) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  13) Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+Finished in 5.67 seconds
+105 examples, 13 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:106 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:126 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:125 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:122 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:124 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:121 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:123 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:99 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:100 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:98 # User pages edit page 
+rspec ./spec/requests/authentication_pages_spec.rb:104 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:105 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:110 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+
+
+

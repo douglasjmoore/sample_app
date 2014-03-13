@@ -1,0 +1,16 @@
+
+Listing 9.2. The user edit action.
+subl app/controllers/users_controller.rb
+
+class UsersController < ApplicationController
+  .
+  .
+  .
+  def edit
+    @user = User.find(params[:id])
+  end
+  .
+  .
+  .
+end
+

@@ -1,0 +1,35 @@
+Listing 9.10. The user update action. 
+subl app/controllers/users_controller.rb
+class UsersController < ApplicationController
+  .
+  .
+  .
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+  .
+  .
+  .
+end
+
+
+Failures:
+
+  1) User pages edit with valid information 
+     Failure/Error: it { should have_link('Sign out', href: signout_path) }
+       expected #has_link?("Sign out", {:href=>"/signout"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+Finished in 2.14 seconds
+89 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:100 # User pages edit with valid information 
+

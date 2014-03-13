@@ -1,0 +1,276 @@
+
+Listing 9.43. User delete links (viewable only by admins).
+subl app/views/users/_user.html.erb
+
+<li>
+  <%= gravatar_for user, size: 52 %>
+  <%= link_to user.name, user %>
+  <% if current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete", user, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+  <% end %>
+</li>
+
+
+
+
+
+
+
+Failures:
+
+  1) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  2) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  3) Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  4) User pages index delete links as an admin user 
+     Failure/Error: visit users_path
+     ActionView::Template::Error:
+       undefined method `current_user?' for #<#<Class:0xa059588>:0xb77a280>
+     # ./app/views/users/_user.html.erb:5:in `_app_views_users__user_html_erb___957008924_105265680'
+     # ./app/views/users/index.html.erb:10:in `_app_views_users_index_html_erb__754563091_105183870'
+     # ./spec/requests/user_pages_spec.rb:39:in `block (5 levels) in <top (required)>'
+
+  5) User pages index delete links as an admin user should be able to delete another user
+     Failure/Error: visit users_path
+     ActionView::Template::Error:
+       undefined method `current_user?' for #<#<Class:0xa059588>:0xb6ecc3c>
+     # ./app/views/users/_user.html.erb:5:in `_app_views_users__user_html_erb___957008924_105265680'
+     # ./app/views/users/index.html.erb:10:in `_app_views_users_index_html_erb__754563091_105183870'
+     # ./spec/requests/user_pages_spec.rb:39:in `block (5 levels) in <top (required)>'
+
+  6) User pages index delete links as an admin user 
+     Failure/Error: visit users_path
+     ActionView::Template::Error:
+       undefined method `current_user?' for #<#<Class:0xa059588>:0xb65e784>
+     # ./app/views/users/_user.html.erb:5:in `_app_views_users__user_html_erb___957008924_105265680'
+     # ./app/views/users/index.html.erb:10:in `_app_views_users_index_html_erb__754563091_105183870'
+     # ./spec/requests/user_pages_spec.rb:39:in `block (5 levels) in <top (required)>'
+
+  7) User pages edit page 
+     Failure/Error: it { should have_content("Update your profile") }
+       expected #has_content?("Update your profile") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:119:in `block (4 levels) in <top (required)>'
+
+  8) User pages edit page 
+     Failure/Error: it { should have_title("Edit user") }
+       expected #has_title?("Edit user") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:120:in `block (4 levels) in <top (required)>'
+
+  9) User pages edit page 
+     Failure/Error: it { should have_link('change', href: 'http://gravatar.com/emails') }
+       expected #has_link?("change", {:href=>"http://gravatar.com/emails"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:121:in `block (4 levels) in <top (required)>'
+
+  10) User pages edit with invalid information 
+     Failure/Error: before { click_button "Save changes" }
+     Capybara::ElementNotFound:
+       Unable to find button "Save changes"
+     # ./spec/requests/user_pages_spec.rb:125:in `block (4 levels) in <top (required)>'
+
+  11) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  12) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  13) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  14) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  15) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  16) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+Finished in 4.84 seconds
+109 examples, 16 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:104 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:105 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:110 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+rspec ./spec/requests/user_pages_spec.rb:42 # User pages index delete links as an admin user 
+rspec ./spec/requests/user_pages_spec.rb:43 # User pages index delete links as an admin user should be able to delete another user
+rspec ./spec/requests/user_pages_spec.rb:48 # User pages index delete links as an admin user 
+rspec ./spec/requests/user_pages_spec.rb:119 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:120 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:121 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:127 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:147 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:144 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:143 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:146 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:145 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:142 # User pages edit with valid information 
+
+Failures:
+
+  1) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  2) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  3) Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  4) User pages index delete links as an admin user 
+     Failure/Error: it { should have_link('delete', href: user_path(User.first)) }
+       expected #has_link?("delete", {:href=>"/users/181"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:42:in `block (5 levels) in <top (required)>'
+
+  5) User pages index delete links as an admin user should be able to delete another user
+     Failure/Error: click_link('delete', match: :first)
+     Capybara::ElementNotFound:
+       Unable to find link "delete"
+     # ./spec/requests/user_pages_spec.rb:45:in `block (6 levels) in <top (required)>'
+     # ./spec/requests/user_pages_spec.rb:44:in `block (5 levels) in <top (required)>'
+
+  6) User pages edit page 
+     Failure/Error: it { should have_content("Update your profile") }
+       expected #has_content?("Update your profile") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:119:in `block (4 levels) in <top (required)>'
+
+  7) User pages edit page 
+     Failure/Error: it { should have_title("Edit user") }
+       expected #has_title?("Edit user") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:120:in `block (4 levels) in <top (required)>'
+
+  8) User pages edit page 
+     Failure/Error: it { should have_link('change', href: 'http://gravatar.com/emails') }
+       expected #has_link?("change", {:href=>"http://gravatar.com/emails"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:121:in `block (4 levels) in <top (required)>'
+
+  9) User pages edit with invalid information 
+     Failure/Error: before { click_button "Save changes" }
+     Capybara::ElementNotFound:
+       Unable to find button "Save changes"
+     # ./spec/requests/user_pages_spec.rb:125:in `block (4 levels) in <top (required)>'
+
+  10) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  11) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  12) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  13) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  14) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+  15) User pages edit with valid information 
+     Failure/Error: before { valid_signup }
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/support/utilities.rb:26:in `valid_signup'
+     # ./spec/requests/user_pages_spec.rb:131:in `block (4 levels) in <top (required)>'
+
+Finished in 4.45 seconds
+109 examples, 15 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:104 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:105 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:110 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+rspec ./spec/requests/user_pages_spec.rb:42 # User pages index delete links as an admin user 
+rspec ./spec/requests/user_pages_spec.rb:43 # User pages index delete links as an admin user should be able to delete another user
+rspec ./spec/requests/user_pages_spec.rb:119 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:120 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:121 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:127 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:147 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:144 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:145 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:143 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:146 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:142 # User pages edit with valid information 
+

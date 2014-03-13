@@ -1,0 +1,140 @@
+
+Listing 9.46. A before filter restricting the destroy action to admins.
+subl app/controllers/users_controller.rb
+
+class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :admin_user,     only: :destroy
+  .
+  .
+  .
+  private
+    .
+    .
+    .
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+end
+
+
+
+
+
+
+
+
+
+
+Failures:
+
+  1) User pages index delete links as an admin user 
+     Failure/Error: it { should have_link('delete', href: user_path(User.first)) }
+       expected #has_link?("delete", {:href=>"/users/541"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:42:in `block (5 levels) in <top (required)>'
+
+  2) User pages index delete links as an admin user should be able to delete another user
+     Failure/Error: click_link('delete', match: :first)
+     Capybara::ElementNotFound:
+       Unable to find link "delete"
+     # ./spec/requests/user_pages_spec.rb:45:in `block (6 levels) in <top (required)>'
+     # ./spec/requests/user_pages_spec.rb:44:in `block (5 levels) in <top (required)>'
+
+  3) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  4) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  5) Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:100:in `block (4 levels) in <top (required)>'
+
+  6) Authentication authorization as non-admin user submitting a DELETE request to the Users#destroy action 
+     Failure/Error: before { sign_in non_admin, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:118:in `block (4 levels) in <top (required)>'
+
+Finished in 4.85 seconds
+111 examples, 6 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:42 # User pages index delete links as an admin user 
+rspec ./spec/requests/user_pages_spec.rb:43 # User pages index delete links as an admin user should be able to delete another user
+rspec ./spec/requests/authentication_pages_spec.rb:104 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:105 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:110 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+rspec ./spec/requests/authentication_pages_spec.rb:122 # Authentication authorization as non-admin user submitting a DELETE request to the Users#destroy action 
+
+Randomized with seed 1917
+
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ grep  -r -n "current_user=" .
+./app/controllers/users_controller.rb:68:      redirect_to(root_url) unless current_user=(@user)
+./app/helpers/sessions_helper.rb:20:  def current_user=(user)
+./app/helpers/sessions_helper.rb:23:# def current_user=(user)
+./app/helpers/sessions_helper.rb:27:# def current_user=(user)
+./app/views/users/_user.html.erb:5:  <% if current_user.admin? && !current_user=(user) %>
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ 
+
+
+
+
+module SessionsHelper
+
+  def sign_in(user)
+    remember_token = User.new_remember_token
+    cookies.permanent[:remember_token] = remember_token
+    user.update_attribute(:remember_token, User.hash(remember_token))
+    self.current_user = user
+  end
+
+  def signed_in?
+    !current_user.nil?
+  end
+
+  def current_user
+    remember_token = User.hash(cookies[:remember_token])
+    @current_user ||= User.find_by(remember_token: remember_token)
+  end
+
+  def current_user?(user)
+    user == current_user
+  end
+
+  def sign_out
+    current_user.update_attribute(:remember_token, User.hash(User.new_remember_token))
+    cookies.delete(:remember_token)
+    self.current_user = nil
+    end
+
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.url if request.get?
+  end
+
+end
+
+

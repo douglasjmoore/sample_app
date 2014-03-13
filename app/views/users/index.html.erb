@@ -1,0 +1,14 @@
+<!-- This is 9.24/9.33-will_paginate/9.35 -->
+
+
+<% provide(:title, 'All users') %>
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
+

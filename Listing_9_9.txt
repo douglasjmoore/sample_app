@@ -1,0 +1,88 @@
+Listing 9.9. Tests for the user update action. 
+subl spec/requests/user_pages_spec.rb
+require 'spec_helper'
+
+describe "User pages" do
+  .
+  .
+  .
+  describe "edit" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      sign_in user
+      visit edit_user_path(user)
+    end
+    .
+    .
+    .
+    describe "with valid information" do
+      let(:new_name)  { "New Name" }
+      let(:new_email) { "new@example.com" }
+      before do
+        fill_in "Name",             with: new_name
+        fill_in "Email",            with: new_email
+        fill_in "Password",         with: user.password
+        fill_in "Confirm Password", with: user.password
+        click_button "Save changes"
+      end
+
+      it { should have_title(new_name) }
+      it { should have_selector('div.alert.alert-success') }
+      it { should have_link('Sign out', href: signout_path) }
+      specify { expect(user.reload.name).to  eq new_name }
+      specify { expect(user.reload.email).to eq new_email }
+    end
+  end
+end
+
+
+
+
+Failures:
+
+  1) User pages edit with valid information 
+     Failure/Error: click_button "Save changes"
+     ActionView::MissingTemplate:
+       Missing template users/update, application/update with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:95:in `block (4 levels) in <top (required)>'
+
+  2) User pages edit with valid information 
+     Failure/Error: click_button "Save changes"
+     ActionView::MissingTemplate:
+       Missing template users/update, application/update with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:95:in `block (4 levels) in <top (required)>'
+
+  3) User pages edit with valid information 
+     Failure/Error: click_button "Save changes"
+     ActionView::MissingTemplate:
+       Missing template users/update, application/update with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:95:in `block (4 levels) in <top (required)>'
+
+  4) User pages edit with valid information 
+     Failure/Error: click_button "Save changes"
+     ActionView::MissingTemplate:
+       Missing template users/update, application/update with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:95:in `block (4 levels) in <top (required)>'
+
+  5) User pages edit with valid information 
+     Failure/Error: click_button "Save changes"
+     ActionView::MissingTemplate:
+       Missing template users/update, application/update with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:95:in `block (4 levels) in <top (required)>'
+
+Finished in 2.18 seconds
+89 examples, 5 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:98 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:100 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:102 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:101 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:99 # User pages edit with valid information 
+

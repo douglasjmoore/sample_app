@@ -1,0 +1,158 @@
+
+Listing 9.22. Tests for the user index page.
+subl spec/requests/user_pages_spec.rb
+
+require 'spec_helper'
+
+describe "User pages" do
+
+  subject { page }
+
+  describe "index" do
+    before do
+      sign_in FactoryGirl.create(:user)
+      FactoryGirl.create(:user, name: "Bob", email: "bob@example.com")
+      FactoryGirl.create(:user, name: "Ben", email: "ben@example.com")
+      visit users_path
+    end
+
+    it { should have_title('All users') }
+    it { should have_content('All users') }
+
+    it "should list each user" do
+      User.all.each do |user|
+        expect(page).to have_selector('li', text: user.name)
+      end
+    end
+  end
+  .
+  .
+  .
+end
+
+Failures:
+
+  1) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:97:in `block (4 levels) in <top (required)>'
+
+  2) Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:97:in `block (4 levels) in <top (required)>'
+
+  3) Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+     Failure/Error: before { sign_in user, no_capybara: true }
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./spec/support/utilities.rb:14:in `hash'
+     # ./spec/support/utilities.rb:14:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:97:in `block (4 levels) in <top (required)>'
+
+  4) User pages index should list each user
+     Failure/Error: visit users_path
+     ActionView::MissingTemplate:
+       Missing template users/index, application/index with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:12:in `block (3 levels) in <top (required)>'
+
+  5) User pages index 
+     Failure/Error: visit users_path
+     ActionView::MissingTemplate:
+       Missing template users/index, application/index with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:12:in `block (3 levels) in <top (required)>'
+
+  6) User pages index 
+     Failure/Error: visit users_path
+     ActionView::MissingTemplate:
+       Missing template users/index, application/index with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/user_pages_spec.rb:12:in `block (3 levels) in <top (required)>'
+
+  7) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:105:in `block (4 levels) in <top (required)>'
+
+  8) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:105:in `block (4 levels) in <top (required)>'
+
+  9) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:105:in `block (4 levels) in <top (required)>'
+
+  10) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:105:in `block (4 levels) in <top (required)>'
+
+  11) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:105:in `block (4 levels) in <top (required)>'
+
+  12) User pages edit with valid information 
+     Failure/Error: fill_in "Name",             with: new_name
+     Capybara::ElementNotFound:
+       Unable to find field "Name"
+     # ./spec/requests/user_pages_spec.rb:105:in `block (4 levels) in <top (required)>'
+
+  13) User pages edit with invalid information 
+     Failure/Error: before { click_button "Save changes" }
+     Capybara::ElementNotFound:
+       Unable to find button "Save changes"
+     # ./spec/requests/user_pages_spec.rb:97:in `block (4 levels) in <top (required)>'
+
+  14) User pages edit page 
+     Failure/Error: it { should have_link('change', href: 'http://gravatar.com/emails') }
+       expected #has_link?("change", {:href=>"http://gravatar.com/emails"}) to return true, got false
+     # ./spec/requests/user_pages_spec.rb:93:in `block (4 levels) in <top (required)>'
+
+  15) User pages edit page 
+     Failure/Error: it { should have_title("Edit user") }
+       expected #has_title?("Edit user") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:92:in `block (4 levels) in <top (required)>'
+
+  16) User pages edit page 
+     Failure/Error: it { should have_content("Update your profile") }
+       expected #has_content?("Update your profile") to return true, got false
+     # ./spec/requests/user_pages_spec.rb:91:in `block (4 levels) in <top (required)>'
+
+Finished in 2.48 seconds
+100 examples, 16 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:101 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:102 # Authentication authorization as wrong user submitting a GET request to the Users#edit action 
+rspec ./spec/requests/authentication_pages_spec.rb:107 # Authentication authorization as wrong user submitting a PATCH request to the Users#update action 
+rspec ./spec/requests/user_pages_spec.rb:18 # User pages index should list each user
+rspec ./spec/requests/user_pages_spec.rb:16 # User pages index 
+rspec ./spec/requests/user_pages_spec.rb:15 # User pages index 
+rspec ./spec/requests/user_pages_spec.rb:114 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:116 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:117 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:115 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:113 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:112 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:98 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:93 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:92 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:91 # User pages edit page 
+
