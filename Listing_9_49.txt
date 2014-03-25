@@ -1,0 +1,21 @@
+
+Listing 9.49. A partial for the new and edit form fields.
+subl app/views/users/_fields.html.erb
+
+<%= render 'shared/error_messages' %>
+
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<%= f.label :email %>
+<%= f.text_field :email %>
+
+<%= f.label :password %>
+<%= f.password_field :password %>
+
+<%= f.label :password_confirmation, "Confirm Password" %>
+<%= f.password_field :password_confirmation %>
+
+subl app/views/users/edit.html.erb
+subl app/views/users/new.html.erb
+

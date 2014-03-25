@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
-              #Use no paginate    @users = User.all
+    @users = User.paginate(page: params[:page]) #Use no paginate    @users = User.all
   end
 
   def show
@@ -14,6 +13,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to(root_url) if signed_in?
     @user = User.new
   end
 
@@ -24,8 +24,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    #@user = User.new(params[:user])    # Not the final implementation!
-  	@user = User.new(user_params)
+  	redirect_to(root_url) if signed_in?
+    @user = User.new(user_params)
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
@@ -51,23 +51,15 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      #params.require(:user).permit(:name, :email, :password, :password_confirmation ,:admin)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation )
     end
 
     # Before filters
 
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
-
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
-      #redirect_to(root_url) unless current_user?
-      #redirect_to(root_url) unless @current_user
     end
 
     def admin_user

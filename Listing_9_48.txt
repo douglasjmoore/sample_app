@@ -1,0 +1,28 @@
+
+Listing 9.48. Testing that the admin attribute is forbidden.
+subl spec/requests/user_pages_spec.rb
+
+require 'spec_helper'
+
+describe "User pages" do
+  .
+  .
+  .
+  describe "edit" do
+    .
+    .
+    .
+    describe "forbidden attributes" do
+      let(:params) do
+        { user: { admin: true, password: user.password,
+                  password_confirmation: user.password } }
+      end
+      before do
+        sign_in user, no_capybara: true
+        patch user_path(user), params
+      end
+      specify { expect(user.reload).not_to be_admin }
+    end
+  end
+end
+
