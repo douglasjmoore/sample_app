@@ -1,0 +1,35 @@
+
+Listing 10.1. The Micropost migration. (Note the index on user_id and created_at.)
+db/migrate/[timestamp]_create_microposts.rb
+subl db/migrate/20140326011804_create_microposts.rb
+
+
+
+class CreateMicroposts < ActiveRecord::Migration
+  def change
+    create_table :microposts do |t|
+      t.string :content
+      t.integer :user_id
+
+      t.timestamps
+    end
+    add_index :microposts, [:user_id, :created_at]
+  end
+end
+
+
+
+
+
+
+OLD
+class CreateMicroposts < ActiveRecord::Migration
+  def change
+    create_table :microposts do |t|
+      t.string :content
+      t.integer :user_id
+
+      t.timestamps
+    end
+  end
+end

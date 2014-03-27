@@ -1,0 +1,43 @@
+
+Listing 10.45. Tests for the Microposts controller destroy action.
+subl spec/requests/micropost_pages_spec.rb
+
+require 'spec_helper'
+
+describe "Micropost pages" do
+  .
+  .
+  .
+  describe "micropost destruction" do
+    before { FactoryGirl.create(:micropost, user: user) }
+
+    describe "as correct user" do
+      before { visit root_path }
+
+      it "should delete a micropost" do
+        expect { click_link "delete" }.to change(Micropost, :count).by(-1)
+      end
+    end
+  end
+end
+
+
+
+
+Failures:
+
+  1) Micropost pages micropost destruction as correct user should delete a micropost
+     Failure/Error: expect { click_link "delete" }.to change(Micropost, :count).by(-1)
+     ActionView::MissingTemplate:
+       Missing template microposts/destroy, application/destroy with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./spec/requests/micropost_pages_spec.rb:41:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/micropost_pages_spec.rb:41:in `block (4 levels) in <top (required)>'
+
+Finished in 6.55 seconds
+148 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:40 # Micropost pages micropost destruction as correct user should delete a micropost
+

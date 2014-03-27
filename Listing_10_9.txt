@@ -1,0 +1,36 @@
+
+Listing 10.9. The complete factory file, including a new factory for microposts.
+subl spec/factories.rb
+
+FactoryGirl.define do
+  factory :user do
+    sequence(:name)  { |n| "Person #{n}" }
+    sequence(:email) { |n| "person_#{n}@example.com"}
+    password "foobar"
+    password_confirmation "foobar"
+
+    factory :admin do
+      admin true
+    end
+  end
+
+  factory :micropost do
+    content "Lorem ipsum"
+    user
+  end
+end
+
+####OLD
+
+FactoryGirl.define do
+  factory :user do
+    sequence(:name)  { |n| "Person #{n}" }
+    sequence(:email) { |n| "person_#{n}@example.com"}
+    password "foobar"
+    password_confirmation "foobar"
+
+    factory :admin do
+      admin true
+    end
+  end
+end

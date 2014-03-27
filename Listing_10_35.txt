@@ -1,0 +1,74 @@
+
+Listing 10.35. Tests for the (proto-)status feed.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  it { should respond_to(:microposts) }
+  it { should respond_to(:feed) }
+  .
+  .
+  .
+  describe "micropost associations" do
+
+    before { @user.save }
+    let!(:older_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
+    end
+    .
+    .
+    .
+    describe "status" do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
+      end
+
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
+    end
+  end
+end
+
+Failures:
+
+  1) User 
+     Failure/Error: it { should respond_to(:feed) }
+       expected #<User id: nil, name: "Example User", email: "user@example.com", created_at: nil, updated_at: nil, password_digest: "$2a$04$1OFp9EHoSshpWdqle9aCheGhZKWE906ndDZPFFGSh3OE...", remember_token: nil, admin: false> to respond to :feed
+     # ./spec/models/user_spec.rb:22:in `block (2 levels) in <top (required)>'
+
+  2) User micropost associations status feed 
+     Failure/Error: its(:feed) { should include(newer_micropost) }
+     NoMethodError:
+       undefined method `feed' for #<User:0xc3c0af8>
+     # ./spec/models/user_spec.rb:158:in `block (4 levels) in <top (required)>'
+
+  3) User micropost associations status feed 
+     Failure/Error: its(:feed) { should include(older_micropost) }
+     NoMethodError:
+       undefined method `feed' for #<User:0xc3fd2c8>
+     # ./spec/models/user_spec.rb:159:in `block (4 levels) in <top (required)>'
+
+  4) User micropost associations status feed 
+     Failure/Error: its(:feed) { should_not include(unfollowed_post) }
+     NoMethodError:
+       undefined method `feed' for #<User:0xc48f9e8>
+     # ./spec/models/user_spec.rb:160:in `block (4 levels) in <top (required)>'
+
+Finished in 5.68 seconds
+146 examples, 4 failures
+
+Failed examples:
+
+rspec ./spec/models/user_spec.rb:22 # User 
+rspec ./spec/models/user_spec.rb:158 # User micropost associations status feed 
+rspec ./spec/models/user_spec.rb:159 # User micropost associations status feed 
+rspec ./spec/models/user_spec.rb:160 # User micropost associations status feed 
+

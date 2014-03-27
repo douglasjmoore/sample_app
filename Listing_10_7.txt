@@ -1,0 +1,9 @@
+
+Listing 10.7. A micropost belongs_to a user.
+app/models/micropost.rb
+
+class Micropost < ActiveRecord::Base
+  belongs_to :user
+  validates :user_id, presence: true
+end
+

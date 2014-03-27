@@ -1,0 +1,32 @@
+
+Listing 10.25. Adding authentication to the Microposts controller actions.
+subl app/controllers/microposts_controller.rb
+
+class MicropostsController < ApplicationController
+  before_action :signed_in_user
+
+  def create
+  end
+
+  def destroy
+  end
+end
+
+
+
+
+
+or
+
+class MicropostsController < ApplicationController
+  before_action :signed_in_user, only: [:create, :destroy]
+
+  def index
+  end
+
+  def create
+  end
+
+  def destroy
+  end
+end

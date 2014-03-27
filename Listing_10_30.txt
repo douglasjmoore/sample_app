@@ -1,0 +1,49 @@
+
+Listing 10.30. The form partial for creating microposts.
+subl app/views/shared/_micropost_form.html.erb
+
+<%= form_for(@micropost) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
+
+CREATED NEW
+
+Failures:
+
+  1) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       First argument in form cannot contain nil or be empty
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb__366939417_97614390'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb___407232164_97765120'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  2) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       First argument in form cannot contain nil or be empty
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb__366939417_97614390'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb___407232164_97765120'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  3) Micropost pages micropost creation with valid information should create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       First argument in form cannot contain nil or be empty
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb__366939417_97614390'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb___407232164_97765120'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+Finished in 5.77 seconds
+142 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+rspec ./spec/requests/micropost_pages_spec.rb:28 # Micropost pages micropost creation with valid information should create a micropost
+

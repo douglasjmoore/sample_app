@@ -1,0 +1,49 @@
+
+Listing 10.41. Adding a status feed to the Home page.
+subl app/views/static_pages/home.html.erb
+
+<% if signed_in? %>
+  <div class="row">
+    .
+    .
+    .
+    <div class="span8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+  .
+  .
+  .
+<% end %>
+
+Failures:
+
+  1) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: expect { click_button "Post" }.not_to change(Micropost, :count)
+     ActionView::Template::Error:
+       undefined method `any?' for nil:NilClass
+     # ./app/views/shared/_feed.html.erb:1:in `_app_views_shared__feed_html_erb___466259953_94060650'
+     # ./app/views/static_pages/home.html.erb:14:in `_app_views_static_pages_home_html_erb__379910471_94177940'
+     # ./app/controllers/microposts_controller.rb:11:in `create'
+     # ./spec/requests/micropost_pages_spec.rb:16:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/micropost_pages_spec.rb:16:in `block (4 levels) in <top (required)>'
+
+  2) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { click_button "Post" }
+     ActionView::Template::Error:
+       undefined method `any?' for nil:NilClass
+     # ./app/views/shared/_feed.html.erb:1:in `_app_views_shared__feed_html_erb___466259953_94060650'
+     # ./app/views/static_pages/home.html.erb:14:in `_app_views_static_pages_home_html_erb__379910471_94177940'
+     # ./app/controllers/microposts_controller.rb:11:in `create'
+     # ./spec/requests/micropost_pages_spec.rb:20:in `block (5 levels) in <top (required)>'
+
+Finished in 5.97 seconds
+147 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+

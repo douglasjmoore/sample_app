@@ -1,0 +1,55 @@
+
+Listing 10.12. Testing that microposts are destroyed when users are.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  describe "micropost associations" do
+
+    before { @user.save }
+    let!(:older_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
+    end
+    .
+    .
+    .
+    it "should destroy associated microposts" do
+      microposts = @user.microposts.to_a
+      @user.destroy
+      expect(microposts).not_to be_empty
+      microposts.each do |micropost|
+        expect(Micropost.where(id: micropost.id)).to be_empty
+      end
+    end
+  end
+end
+
+
+
+
+
+
+
+Failures:
+
+  1) User micropost associations should destroy associated microposts
+     Failure/Error: expect(Micropost.where(id: micropost.id)).to be_empty
+       expected empty? to return true, got false
+     # ./spec/models/user_spec.rb:148:in `block (4 levels) in <top (required)>'
+     # ./spec/models/user_spec.rb:147:in `each'
+     # ./spec/models/user_spec.rb:147:in `block (3 levels) in <top (required)>'
+
+Finished in 4.97 seconds
+132 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/models/user_spec.rb:143 # User micropost associations should destroy associated microposts
+

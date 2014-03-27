@@ -1,0 +1,26 @@
+
+Listing 10.39. The status feed partial.
+subl app/views/shared/_feed.html.erb
+
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <%= render partial: 'shared/feed_item', collection: @feed_items %>
+  </ol>
+  <%= will_paginate @feed_items %>
+<% end %>
+
+Failures:
+
+  1) Static pages Home page for signed-in users should render the user's feed
+     Failure/Error: expect(page).to have_selector("li##{item.id}", text: item.content)
+       expected #has_selector?("li#2", {:text=>"Dolor sit amet"}) to return true, got false
+     # ./spec/requests/static_pages_spec.rb:76:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/static_pages_spec.rb:75:in `block (4 levels) in <top (required)>'
+
+Finished in 5.84 seconds
+147 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/static_pages_spec.rb:74 # Static pages Home page for signed-in users should render the user's feed
+

@@ -1,0 +1,432 @@
+Listing 10.32. Updating the error-messages partial from Listing 7.24 to work with other objects.
+subl app/views/shared/_error_messages.html.erb
+
+<% if object.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      The form contains <%= pluralize(object.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% object.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+
+#####OLD
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      The form contains <%= pluralize(@user.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+###ALL WRONG WAS
+<% end %
+NOT THIS
+<% end %>
+Failures:
+
+  1) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       /home/dougm/rails_projects/sample_app/app/views/shared/_error_messages.html.erb:18: syntax error, unexpected keyword_ensure, expecting keyword_end
+       /home/dougm/rails_projects/sample_app/app/views/shared/_error_messages.html.erb:20: syntax error, unexpected end-of-input, expecting keyword_end
+     # ./app/views/shared/_micropost_form.html.erb:3:in `block in _app_views_shared__micropost_form_html_erb___409574220_87539300'
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb___409574220_87539300'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__363951967_87382580'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  2) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       /home/dougm/rails_projects/sample_app/app/views/shared/_error_messages.html.erb:18: syntax error, unexpected keyword_ensure, expecting keyword_end
+       /home/dougm/rails_projects/sample_app/app/views/shared/_error_messages.html.erb:20: syntax error, unexpected end-of-input, expecting keyword_end
+     # ./app/views/shared/_micropost_form.html.erb:3:in `block in _app_views_shared__micropost_form_html_erb___409574220_87539300'
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb___409574220_87539300'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__363951967_87382580'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  3) Micropost pages micropost creation with valid information should create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       /home/dougm/rails_projects/sample_app/app/views/shared/_error_messages.html.erb:18: syntax error, unexpected keyword_ensure, expecting keyword_end
+       /home/dougm/rails_projects/sample_app/app/views/shared/_error_messages.html.erb:20: syntax error, unexpected end-of-input, expecting keyword_end
+     # ./app/views/shared/_micropost_form.html.erb:3:in `block in _app_views_shared__micropost_form_html_erb___409574220_87539300'
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb___409574220_87539300'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__363951967_87382580'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+Finished in 0.46795 seconds
+3 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+rspec ./spec/requests/micropost_pages_spec.rb:28 # Micropost pages micropost creation with valid information should create a micropost
+
+FOR ALL TESTING used object and errors
+Failures:
+
+  1) Authentication authorization for non-signed-in users when attempting to visit a protected page after signing in should render the desired protected page
+     Failure/Error: sign_in user, no_capybara: false
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xb4708c8>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/support/utilities.rb:19:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:73:in `block (5 levels) in <top (required)>'
+
+  2) Authentication authorization for non-signed-in users when attempting to visit a protected page after signing in when signing in again should render the default (profile) page
+     Failure/Error: sign_in user, no_capybara: false
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fcfa7c>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/support/utilities.rb:19:in `sign_in'
+     # ./spec/requests/authentication_pages_spec.rb:73:in `block (5 levels) in <top (required)>'
+
+  3) Static pages should have the right links on the layout
+     Failure/Error: click_link "Sign up now!"
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xb2dd4d4>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/static_pages_spec.rb:21:in `block (2 levels) in <top (required)>'
+
+  4) Static pages Contact page should have the right links on the layout
+     Failure/Error: click_link "Sign up now!"
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9facfe0>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/static_pages_spec.rb:142:in `block (3 levels) in <top (required)>'
+
+  5) Static pages Help page should have the right links on the layout
+     Failure/Error: click_link "Sign up now!"
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9f73538>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/static_pages_spec.rb:89:in `block (3 levels) in <top (required)>'
+
+  6) Static pages About page should have the right links on the layout
+     Failure/Error: click_link "Sign up now!"
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xa0a4a24>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/static_pages_spec.rb:114:in `block (3 levels) in <top (required)>'
+
+  7) Static pages Home page should have the right links on the layout
+     Failure/Error: click_link "Sign up now!"
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xa061ddc>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/static_pages_spec.rb:58:in `block (3 levels) in <top (required)>'
+
+  8) User pages edit forbidden attributes 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xb3d5878>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  9) User pages edit with invalid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fdb200>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  10) User pages edit with valid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fc42a8>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  11) User pages edit with valid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xa099840>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  12) User pages edit with valid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9ffe534>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  13) User pages edit with valid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fe0dcc>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  14) User pages edit with valid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fce500>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  15) User pages edit with valid information 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xa0afeec>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  16) User pages edit page 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xa008214>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  17) User pages edit page 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9ff7540>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  18) User pages edit page 
+     Failure/Error: visit edit_user_path(user)
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fd5ef4>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/edit.html.erb:9:in `block in _app_views_users_edit_html_erb__838495991_94629620'
+     # ./app/views/users/edit.html.erb:8:in `_app_views_users_edit_html_erb__838495991_94629620'
+     # ./spec/requests/user_pages_spec.rb:136:in `block (3 levels) in <top (required)>'
+
+  19) User pages signup page 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0xa0953f8>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  20) User pages signup page 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9f064ec>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  21) User pages signup page 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9e1658c>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  22) User pages signup page with invalid information should not create a user
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fa7c20>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  23) User pages signup page with invalid information after submission 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9f0caa4>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  24) User pages signup page with invalid information after submission 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9e143f4>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  25) User pages signup page it should behave like all user pages 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fb2738>
+     Shared Example Group: "all user pages" called from ./spec/requests/user_pages_spec.rb:83
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  26) User pages signup page it should behave like all user pages 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9f1b054>
+     Shared Example Group: "all user pages" called from ./spec/requests/user_pages_spec.rb:83
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  27) User pages signup page with valid information should create a user
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9e18ea4>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  28) User pages signup page with valid information after saving the user 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fbbb58>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  29) User pages signup page with valid information after saving the user 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9f3e7e8>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  30) User pages signup page with valid information after saving the user 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9d8715c>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+  31) User pages signup page with valid information after saving the user followed by signout 
+     Failure/Error: before { visit signup_path }
+     ActionView::Template::Error:
+       undefined local variable or method `object' for #<#<Class:0x95620f8>:0x9fc22c8>
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__443095750_94652430'
+     # ./app/views/users/_fields.html.erb:1:in `_app_views_users__fields_html_erb__101864331_94652180'
+     # ./app/views/users/new.html.erb:9:in `block in _app_views_users_new_html_erb___864360435_93774840'
+     # ./app/views/users/new.html.erb:8:in `_app_views_users_new_html_erb___864360435_93774840'
+     # ./spec/requests/user_pages_spec.rb:77:in `block (3 levels) in <top (required)>'
+
+Finished in 5.92 seconds
+142 examples, 31 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:78 # Authentication authorization for non-signed-in users when attempting to visit a protected page after signing in should render the desired protected page
+rspec ./spec/requests/authentication_pages_spec.rb:91 # Authentication authorization for non-signed-in users when attempting to visit a protected page after signing in when signing in again should render the default (profile) page
+rspec ./spec/requests/static_pages_spec.rb:11 # Static pages should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:139 # Static pages Contact page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:80 # Static pages Help page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:109 # Static pages About page should have the right links on the layout
+rspec ./spec/requests/static_pages_spec.rb:49 # Static pages Home page should have the right links on the layout
+rspec ./spec/requests/user_pages_spec.rb:180 # User pages edit forbidden attributes 
+rspec ./spec/requests/user_pages_spec.rb:149 # User pages edit with invalid information 
+rspec ./spec/requests/user_pages_spec.rb:167 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:165 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:166 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:168 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:169 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:164 # User pages edit with valid information 
+rspec ./spec/requests/user_pages_spec.rb:142 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:141 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:143 # User pages edit page 
+rspec ./spec/requests/user_pages_spec.rb:85 # User pages signup page 
+rspec ./spec/requests/user_pages_spec.rb:84 # User pages signup page 
+rspec ./spec/requests/user_pages_spec.rb:86 # User pages signup page 
+rspec ./spec/requests/user_pages_spec.rb:89 # User pages signup page with invalid information should not create a user
+rspec ./spec/requests/user_pages_spec.rb:96 # User pages signup page with invalid information after submission 
+rspec ./spec/requests/user_pages_spec.rb:95 # User pages signup page with invalid information after submission 
+rspec ./spec/requests/user_pages_spec.rb:55 # User pages signup page it should behave like all user pages 
+rspec ./spec/requests/user_pages_spec.rb:54 # User pages signup page it should behave like all user pages 
+rspec ./spec/requests/user_pages_spec.rb:109 # User pages signup page with valid information should create a user
+rspec ./spec/requests/user_pages_spec.rb:118 # User pages signup page with valid information after saving the user 
+rspec ./spec/requests/user_pages_spec.rb:117 # User pages signup page with valid information after saving the user 
+rspec ./spec/requests/user_pages_spec.rb:119 # User pages signup page with valid information after saving the user 
+rspec ./spec/requests/user_pages_spec.rb:123 # User pages signup page with valid information after saving the user followed by signout 

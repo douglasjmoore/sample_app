@@ -1,0 +1,58 @@
+
+Listing 10.31. Adding a micropost instance variable to the home action.
+subl app/controllers/static_pages_controller.rb
+
+class StaticPagesController < ApplicationController
+
+  def home
+    @micropost = current_user.microposts.build if signed_in?
+  end
+  .
+  .
+  .
+end
+
+
+
+
+Failures:
+
+  1) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       undefined method `errors' for nil:NilClass
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__840390662_91710830'
+     # ./app/views/shared/_micropost_form.html.erb:3:in `block in _app_views_shared__micropost_form_html_erb___855553900_91702690'
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb___855553900_91702690'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__695388611_101483350'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  2) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       undefined method `errors' for nil:NilClass
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__840390662_91710830'
+     # ./app/views/shared/_micropost_form.html.erb:3:in `block in _app_views_shared__micropost_form_html_erb___855553900_91702690'
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb___855553900_91702690'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__695388611_101483350'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  3) Micropost pages micropost creation with valid information should create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       undefined method `errors' for nil:NilClass
+     # ./app/views/shared/_error_messages.html.erb:2:in `_app_views_shared__error_messages_html_erb__840390662_91710830'
+     # ./app/views/shared/_micropost_form.html.erb:3:in `block in _app_views_shared__micropost_form_html_erb___855553900_91702690'
+     # ./app/views/shared/_micropost_form.html.erb:2:in `_app_views_shared__micropost_form_html_erb___855553900_91702690'
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__695388611_101483350'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+Finished in 5.58 seconds
+142 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+rspec ./spec/requests/micropost_pages_spec.rb:28 # Micropost pages micropost creation with valid information should create a micropost
+

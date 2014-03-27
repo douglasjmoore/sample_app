@@ -1,0 +1,17 @@
+
+Listing 10.36. A preliminary implementation for the micropost status feed.
+subl app/models/user.rb
+
+class User < ActiveRecord::Base
+  .
+  .
+  .
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
+  end
+  .
+  .
+  .
+end
+

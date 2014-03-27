@@ -1,0 +1,32 @@
+
+Listing 10.38. Adding a feed instance variable to the home action.
+subl app/controllers/static_pages_controller.rb
+
+class StaticPagesController < ApplicationController
+
+  def home
+    if signed_in?
+      @micropost  = current_user.microposts.build
+      @feed_items = current_user.feed.paginate(page: params[:page])
+    end
+  end
+  .
+  .
+  .
+end
+
+Failures:
+
+  1) Static pages Home page for signed-in users should render the user's feed
+     Failure/Error: expect(page).to have_selector("li##{item.id}", text: item.content)
+       expected #has_selector?("li#2", {:text=>"Dolor sit amet"}) to return true, got false
+     # ./spec/requests/static_pages_spec.rb:76:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/static_pages_spec.rb:75:in `block (4 levels) in <top (required)>'
+
+Finished in 5.92 seconds
+147 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/requests/static_pages_spec.rb:74 # Static pages Home page for signed-in users should render the user's feed
+

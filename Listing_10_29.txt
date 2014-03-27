@@ -1,0 +1,57 @@
+
+Listing 10.29. The partial for the user info sidebar.
+subl app/views/shared/_user_info.html.erb
+
+<%= link_to gravatar_for(current_user, size: 52), current_user %>
+<h1>
+  <%= current_user.name %>
+</h1>
+<span>
+  <%= link_to "view my profile", current_user %>
+</span>
+<span>
+  <%= pluralize(current_user.microposts.count, "micropost") %>
+</span>
+
+
+
+
+
+
+
+
+Failures:
+
+  1) Micropost pages micropost creation with valid information should create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       Missing partial shared/micropost_form with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__528048326_92213410'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  2) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       Missing partial shared/micropost_form with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__528048326_92213410'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  3) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { visit root_path }
+     ActionView::Template::Error:
+       Missing partial shared/micropost_form with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/views/static_pages/home.html.erb:9:in `_app_views_static_pages_home_html_erb__528048326_92213410'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+Finished in 5.95 seconds
+142 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:28 # Micropost pages micropost creation with valid information should create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+

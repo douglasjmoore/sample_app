@@ -1,0 +1,94 @@
+
+Listing 10.26. Tests for creating microposts.
+subl spec/requests/micropost_pages_spec.rb
+
+require 'spec_helper'
+
+describe "Micropost pages" do
+
+  subject { page }
+
+  let(:user) { FactoryGirl.create(:user) }
+  before { sign_in user }
+
+  describe "micropost creation" do
+    before { visit root_path }
+
+    describe "with invalid information" do
+
+      it "should not create a micropost" do
+        expect { click_button "Post" }.not_to change(Micropost, :count)
+      end
+
+      describe "error messages" do
+        before { click_button "Post" }
+        it { should have_content('error') }
+      end
+    end
+
+    describe "with valid information" do
+
+      before { fill_in 'micropost_content', with: "Lorem ipsum" }
+      it "should create a micropost" do
+        expect { click_button "Post" }.to change(Micropost, :count).by(1)
+      end
+    end
+  end
+end
+
+
+
+
+####OLD
+
+
+
+
+require 'spec_helper'
+
+describe "MicropostPages" do
+  describe "GET /micropost_pages" do
+    it "works! (now write some real specs)" do
+      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
+      get micropost_pages_index_path
+      response.status.should be(200)
+    end
+  end
+end
+
+
+
+
+
+
+
+Failures:
+
+  1) Micropost pages micropost creation with valid information should create a micropost
+     Failure/Error: before { fill_in 'micropost_content', with: "Lorem ipsum" }
+     Capybara::ElementNotFound:
+       Unable to find field "micropost_content"
+     # ./spec/requests/micropost_pages_spec.rb:27:in `block (4 levels) in <top (required)>'
+
+  2) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: expect { click_button "Post" }.not_to change(Micropost, :count)
+     Capybara::ElementNotFound:
+       Unable to find button "Post"
+     # ./spec/requests/micropost_pages_spec.rb:16:in `block (5 levels) in <top (required)>'
+     # ./spec/requests/micropost_pages_spec.rb:16:in `block (4 levels) in <top (required)>'
+
+  3) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { click_button "Post" }
+     Capybara::ElementNotFound:
+       Unable to find button "Post"
+     # ./spec/requests/micropost_pages_spec.rb:20:in `block (5 levels) in <top (required)>'
+
+Finished in 5.51 seconds
+142 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/requests/micropost_pages_spec.rb:28 # Micropost pages micropost creation with valid information should create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+

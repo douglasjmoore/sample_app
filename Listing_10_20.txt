@@ -1,0 +1,40 @@
+
+Listing 10.20. Adding microposts to the sample data.
+subl lib/tasks/sample_data.rake
+
+namespace :db do
+  desc "Fill database with sample data"
+  task populate: :environment do
+    .
+    .
+    .
+    users = User.all(limit: 6)
+    50.times do
+      content = Faker::Lorem.sentence(5)
+      users.each { |user| user.microposts.create!(content: content) }
+    end
+  end
+end
+
+RUN
+bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.0386s
+-- add_index("microposts", ["user_id", "created_at"], {:name=>"index_microposts_on_user_id_and_created_at"})
+   -> 0.0063s
+-- create_table("users", {:force=>true})
+   -> 0.0087s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.0059s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token"})
+   -> 0.0142s
+-- initialize_schema_migrations_table()
+   -> 0.0146s
+
+
+bundle exec rake db:populate
+NOTHING
+
+bundle exec rake test:prepare
+NOTHING
+

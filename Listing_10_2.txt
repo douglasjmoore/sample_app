@@ -1,0 +1,26 @@
+
+Listing 10.2. The initial Micropost spec.
+subl spec/models/micropost_spec.rb
+
+require 'spec_helper'
+
+describe Micropost do
+
+  let(:user) { FactoryGirl.create(:user) }
+  before do
+    # This code is not idiomatically correct.
+    @micropost = Micropost.new(content: "Lorem ipsum", user_id: user.id)
+  end
+
+  subject { @micropost }
+
+  it { should respond_to(:content) }
+  it { should respond_to(:user_id) }
+end
+
+########OLD
+require 'spec_helper'
+
+describe Micropost do
+  pending "add some examples to (or delete) #{__FILE__}"
+end

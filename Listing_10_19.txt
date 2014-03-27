@@ -1,0 +1,20 @@
+
+Listing 10.19. Adding an @microposts instance variable to the user show action.
+subl app/controllers/users_controller.rb
+
+class UsersController < ApplicationController
+  .
+  .
+  .
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+  end
+  .
+  .
+  .
+end
+
+
+
+

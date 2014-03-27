@@ -1,0 +1,75 @@
+
+Listing 10.18. A partial for showing a single micropost.
+subl app/views/microposts/_micropost.html.erb
+
+<li>
+  <span class="content"><%= micropost.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+  </span>
+</li>
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:65 # User pages profile page 
+rspec ./spec/requests/user_pages_spec.rb:66 # User pages profile page 
+rspec ./spec/requests/user_pages_spec.rb:71 # User pages profile page microposts 
+rspec ./spec/requests/user_pages_spec.rb:70 # User pages profile page microposts 
+rspec ./spec/requests/user_pages_spec.rb:69 # User pages profile page microposts 
+
+Randomized with seed 13702
+
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ subl Listing_10_18.txt
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ subl app/views/microposts/_micropost.html.erb
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ subl app/views/microposts/_micropost.html.erb
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ bundle exec rspec spec/
+No DRb server is running. Running in local process instead ...
+...................FFFFF.................................................................................................................
+
+Failures:
+
+  1) User pages profile page 
+     Failure/Error: before { visit user_path(user) }
+     ActionView::Template::Error:
+       'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.
+     # ./app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb___406056638_92212230'
+     # ./spec/requests/user_pages_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+  2) User pages profile page 
+     Failure/Error: before { visit user_path(user) }
+     ActionView::Template::Error:
+       'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.
+     # ./app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb___406056638_92212230'
+     # ./spec/requests/user_pages_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+  3) User pages profile page microposts 
+     Failure/Error: before { visit user_path(user) }
+     ActionView::Template::Error:
+       'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.
+     # ./app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb___406056638_92212230'
+     # ./spec/requests/user_pages_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+  4) User pages profile page microposts 
+     Failure/Error: before { visit user_path(user) }
+     ActionView::Template::Error:
+       'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.
+     # ./app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb___406056638_92212230'
+     # ./spec/requests/user_pages_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+  5) User pages profile page microposts 
+     Failure/Error: before { visit user_path(user) }
+     ActionView::Template::Error:
+       'nil' is not an ActiveModel-compatible object. It must implement :to_partial_path.
+     # ./app/views/users/show.html.erb:16:in `_app_views_users_show_html_erb___406056638_92212230'
+     # ./spec/requests/user_pages_spec.rb:63:in `block (3 levels) in <top (required)>'
+
+Finished in 5.1 seconds
+137 examples, 5 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:65 # User pages profile page 
+rspec ./spec/requests/user_pages_spec.rb:66 # User pages profile page 
+rspec ./spec/requests/user_pages_spec.rb:69 # User pages profile page microposts 
+rspec ./spec/requests/user_pages_spec.rb:70 # User pages profile page microposts 
+rspec ./spec/requests/user_pages_spec.rb:71 # User pages profile page microposts 

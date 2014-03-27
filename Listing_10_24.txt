@@ -1,0 +1,45 @@
+
+Listing 10.24. Moving the signed_in_user method into the Sessions helper.
+subl app/helpers/sessions_helper.rb
+
+module SessionsHelper
+  .
+  .
+  .
+  def current_user?(user)
+    user == current_user
+  end
+
+  def signed_in_user
+    unless signed_in?
+      store_location
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
+  .
+  .
+  .
+end
+
+Failures:
+
+  1) Authentication authorization for non-signed-in users in the Microposts controller submitting to the create action 
+     Failure/Error: before { post microposts_path }
+     ActionController::RoutingError:
+       uninitialized constant MicropostsController
+     # ./spec/requests/authentication_pages_spec.rb:119:in `block (6 levels) in <top (required)>'
+
+  2) Authentication authorization for non-signed-in users in the Microposts controller submitting to the destroy action 
+     Failure/Error: before { delete micropost_path(FactoryGirl.create(:micropost)) }
+     ActionController::RoutingError:
+       uninitialized constant MicropostsController
+     # ./spec/requests/authentication_pages_spec.rb:124:in `block (6 levels) in <top (required)>'
+
+Finished in 5.22 seconds
+139 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:120 # Authentication authorization for non-signed-in users in the Microposts controller submitting to the create action 
+rspec ./spec/requests/authentication_pages_spec.rb:125 # Authentication authorization for non-signed-in users in the Microposts controller submitting to the destroy action 
+

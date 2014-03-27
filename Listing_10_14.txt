@@ -1,0 +1,49 @@
+
+Listing 10.14. Tests for the Micropost model validations.
+subl spec/models/micropost_spec.rb
+
+require 'spec_helper'
+
+describe Micropost do
+
+  let(:user) { FactoryGirl.create(:user) }
+  before { @micropost = user.microposts.build(content: "Lorem ipsum") }
+  .
+  .
+  .
+  describe "when user_id is not present" do
+    before { @micropost.user_id = nil }
+    it { should_not be_valid }
+  end
+
+  describe "with blank content" do
+    before { @micropost.content = " " }
+    it { should_not be_valid }
+  end
+
+  describe "with content that is too long" do
+    before { @micropost.content = "a" * 141 }
+    it { should_not be_valid }
+  end
+end
+
+Failures:
+
+  1) Micropost with blank content 
+     Failure/Error: it { should_not be_valid }
+       expected #<Micropost id: nil, content: " ", user_id: 541, created_at: nil, updated_at: nil> not to be valid
+     # ./spec/models/micropost_spec.rb:25:in `block (3 levels) in <top (required)>'
+
+  2) Micropost with content that is too long 
+     Failure/Error: it { should_not be_valid }
+       expected #<Micropost id: nil, content: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...", user_id: 541, created_at: nil, updated_at: nil> not to be valid
+     # ./spec/models/micropost_spec.rb:30:in `block (3 levels) in <top (required)>'
+
+Finished in 5.67 seconds
+134 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/models/micropost_spec.rb:25 # Micropost with blank content 
+rspec ./spec/models/micropost_spec.rb:30 # Micropost with content that is too long 
+

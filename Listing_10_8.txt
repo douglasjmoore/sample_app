@@ -1,0 +1,11 @@
+
+Listing 10.8. A user has_many microposts.
+subl app/models/user.rb
+
+class User < ActiveRecord::Base
+  has_many :microposts
+  .
+  .
+  .
+end
+
