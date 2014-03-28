@@ -1,0 +1,45 @@
+
+Listing 11.2. Testing Relationship creation and attributes.
+subl spec/models/relationship_spec.rb
+
+require 'spec_helper'
+
+describe Relationship do
+
+  let(:follower) { FactoryGirl.create(:user) }
+  let(:followed) { FactoryGirl.create(:user) }
+  let(:relationship) { follower.relationships.build(followed_id: followed.id) }
+
+  subject { relationship }
+
+  it { should be_valid }
+end
+
+###OLD
+
+require 'spec_helper'
+
+describe Relationship do
+  pending "add some examples to (or delete) #{__FILE__}"
+end
+
+
+
+Failures:
+
+  1) Relationship 
+     Failure/Error: let(:relationship) { follower.relationships.build(followed_id: followed.id) }
+     NoMethodError:
+       undefined method `relationships' for #<User:0xb4256e8>
+     # ./spec/models/relationship_spec.rb:8:in `block (2 levels) in <top (required)>'
+     # ./spec/models/relationship_spec.rb:10:in `block (2 levels) in <top (required)>'
+     # ./spec/models/relationship_spec.rb:12:in `block (2 levels) in <top (required)>'
+
+Finished in 6.47 seconds
+149 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/models/relationship_spec.rb:12 # Relationship 
+
+

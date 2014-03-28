@@ -1,0 +1,111 @@
+
+Listing 11.29. Test for the followed_users and followers pages.
+subl spec/requests/user_pages_spec.rb
+
+require 'spec_helper'
+
+describe "User pages" do
+  .
+  .
+  .
+  describe "following/followers" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:other_user) { FactoryGirl.create(:user) }
+    before { user.follow!(other_user) }
+
+    describe "followed users" do
+      before do
+        sign_in user
+        visit following_user_path(user)
+      end
+
+      it { should have_title(full_title('Following')) }
+      it { should have_selector('h3', text: 'Following') }
+      it { should have_link(other_user.name, href: user_path(other_user)) }
+    end
+
+    describe "followers" do
+      before do
+        sign_in other_user
+        visit followers_user_path(other_user)
+      end
+
+      it { should have_title(full_title('Followers')) }
+      it { should have_selector('h3', text: 'Followers') }
+      it { should have_link(user.name, href: user_path(user)) }
+    end
+  end
+end
+
+
+
+
+
+Failures:
+
+  1) Authentication authorization for non-signed-in users in the Users controller visiting the followers page 
+     Failure/Error: before { visit followers_user_path(user) }
+     AbstractController::ActionNotFound:
+       The action 'followers' could not be found for UsersController
+     # ./spec/requests/authentication_pages_spec.rb:121:in `block (6 levels) in <top (required)>'
+
+  2) Authentication authorization for non-signed-in users in the Users controller visiting the following page 
+     Failure/Error: before { visit following_user_path(user) }
+     AbstractController::ActionNotFound:
+       The action 'following' could not be found for UsersController
+     # ./spec/requests/authentication_pages_spec.rb:116:in `block (6 levels) in <top (required)>'
+
+  3) User pages following/followers followed users 
+     Failure/Error: visit following_user_path(user)
+     AbstractController::ActionNotFound:
+       The action 'following' could not be found for UsersController
+     # ./spec/requests/user_pages_spec.rb:192:in `block (4 levels) in <top (required)>'
+
+  4) User pages following/followers followed users 
+     Failure/Error: visit following_user_path(user)
+     AbstractController::ActionNotFound:
+       The action 'following' could not be found for UsersController
+     # ./spec/requests/user_pages_spec.rb:192:in `block (4 levels) in <top (required)>'
+
+  5) User pages following/followers followed users 
+     Failure/Error: visit following_user_path(user)
+     AbstractController::ActionNotFound:
+       The action 'following' could not be found for UsersController
+     # ./spec/requests/user_pages_spec.rb:192:in `block (4 levels) in <top (required)>'
+
+  6) User pages following/followers followers 
+     Failure/Error: visit followers_user_path(other_user)
+     AbstractController::ActionNotFound:
+       The action 'followers' could not be found for UsersController
+     # ./spec/requests/user_pages_spec.rb:203:in `block (4 levels) in <top (required)>'
+
+  7) User pages following/followers followers 
+     Failure/Error: visit followers_user_path(other_user)
+     AbstractController::ActionNotFound:
+       The action 'followers' could not be found for UsersController
+     # ./spec/requests/user_pages_spec.rb:203:in `block (4 levels) in <top (required)>'
+
+  8) User pages following/followers followers 
+     Failure/Error: visit followers_user_path(other_user)
+     AbstractController::ActionNotFound:
+       The action 'followers' could not be found for UsersController
+     # ./spec/requests/user_pages_spec.rb:203:in `block (4 levels) in <top (required)>'
+
+Finished in 7.51 seconds
+177 examples, 8 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:122 # Authentication authorization for non-signed-in users in the Users controller visiting the followers page 
+rspec ./spec/requests/authentication_pages_spec.rb:117 # Authentication authorization for non-signed-in users in the Users controller visiting the following page 
+rspec ./spec/requests/user_pages_spec.rb:195 # User pages following/followers followed users 
+rspec ./spec/requests/user_pages_spec.rb:196 # User pages following/followers followed users 
+rspec ./spec/requests/user_pages_spec.rb:197 # User pages following/followers followed users 
+rspec ./spec/requests/user_pages_spec.rb:206 # User pages following/followers followers 
+rspec ./spec/requests/user_pages_spec.rb:207 # User pages following/followers followers 
+rspec ./spec/requests/user_pages_spec.rb:208 # User pages following/followers followers 
+
+
+
+
+

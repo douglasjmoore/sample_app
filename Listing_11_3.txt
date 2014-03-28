@@ -1,0 +1,42 @@
+
+Listing 11.3. Testing for the user.relationships attribute.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  it { should respond_to(:feed) }
+  it { should respond_to(:relationships) }
+  .
+  .
+  .
+end
+
+
+
+Failures:
+
+  1) Relationship 
+     Failure/Error: let(:relationship) { follower.relationships.build(followed_id: followed.id) }
+     NoMethodError:
+       undefined method `relationships' for #<User:0xae098e0>
+     # ./spec/models/relationship_spec.rb:8:in `block (2 levels) in <top (required)>'
+     # ./spec/models/relationship_spec.rb:10:in `block (2 levels) in <top (required)>'
+     # ./spec/models/relationship_spec.rb:12:in `block (2 levels) in <top (required)>'
+
+  2) User 
+     Failure/Error: it { should respond_to(:relationships) }
+       expected #<User id: nil, name: "Example User", email: "user@example.com", created_at: nil, updated_at: nil, password_digest: "$2a$04$Ya7bBjUFYh.u76H8CtuEOu3HIpe60.YgdzoFTe6F2G28...", remember_token: nil, admin: false> to respond to :relationships
+     # ./spec/models/user_spec.rb:23:in `block (2 levels) in <top (required)>'
+
+Finished in 6.35 seconds
+150 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/models/relationship_spec.rb:12 # Relationship 
+rspec ./spec/models/user_spec.rb:23 # User 
+

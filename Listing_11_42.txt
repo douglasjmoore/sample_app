@@ -1,0 +1,125 @@
+
+Listing 11.42. Adding the completed feed to the User model.
+subl app/models/user.rb
+
+class User < ActiveRecord::Base
+  .
+  .
+  .
+  def feed
+    Micropost.from_users_followed_by(self)
+  end
+  .
+  .
+  .
+end
+
+
+
+Failures:
+
+  1) Static pages Home page for signed-in users should render the user's feed
+     Failure/Error: visit root_path
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/static_pages_spec.rb:72:in `block (4 levels) in <top (required)>'
+
+  2) Static pages Home page for signed-in users follower/following counts 
+     Failure/Error: visit root_path
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/static_pages_spec.rb:72:in `block (4 levels) in <top (required)>'
+
+  3) Static pages Home page for signed-in users follower/following counts 
+     Failure/Error: visit root_path
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/static_pages_spec.rb:72:in `block (4 levels) in <top (required)>'
+
+  4) Micropost pages micropost creation with invalid information should not create a micropost
+     Failure/Error: before { visit root_path }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  5) Micropost pages micropost creation with invalid information error messages 
+     Failure/Error: before { visit root_path }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  6) Micropost pages micropost creation with valid information should create a micropost
+     Failure/Error: before { visit root_path }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/micropost_pages_spec.rb:11:in `block (3 levels) in <top (required)>'
+
+  7) Micropost pages micropost destruction as correct user should delete a micropost
+     Failure/Error: before { visit root_path }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./app/controllers/static_pages_controller.rb:6:in `home'
+     # ./spec/requests/micropost_pages_spec.rb:38:in `block (4 levels) in <top (required)>'
+
+  8) User micropost associations status feed 
+     Failure/Error: its(:feed) { should include(newer_micropost) }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./spec/models/user_spec.rb:172:in `block (4 levels) in <top (required)>'
+
+  9) User micropost associations status feed 
+     Failure/Error: its(:feed) { should_not include(unfollowed_post) }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./spec/models/user_spec.rb:174:in `block (4 levels) in <top (required)>'
+
+  10) User micropost associations status feed 
+     Failure/Error: should include(micropost)
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./spec/models/user_spec.rb:177:in `block (5 levels) in <top (required)>'
+     # ./spec/models/user_spec.rb:176:in `block (4 levels) in <top (required)>'
+
+  11) User micropost associations status feed 
+     Failure/Error: its(:feed) { should include(older_micropost) }
+     NoMethodError:
+       undefined method `from_users_followed_by' for #<Class:0xa9cf464>
+     # ./app/models/user.rb:31:in `feed'
+     # ./spec/models/user_spec.rb:173:in `block (4 levels) in <top (required)>'
+
+Finished in 7 seconds
+190 examples, 11 failures
+
+Failed examples:
+
+rspec ./spec/requests/static_pages_spec.rb:75 # Static pages Home page for signed-in users should render the user's feed
+rspec ./spec/requests/static_pages_spec.rb:88 # Static pages Home page for signed-in users follower/following counts 
+rspec ./spec/requests/static_pages_spec.rb:89 # Static pages Home page for signed-in users follower/following counts 
+rspec ./spec/requests/micropost_pages_spec.rb:15 # Micropost pages micropost creation with invalid information should not create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:21 # Micropost pages micropost creation with invalid information error messages 
+rspec ./spec/requests/micropost_pages_spec.rb:28 # Micropost pages micropost creation with valid information should create a micropost
+rspec ./spec/requests/micropost_pages_spec.rb:40 # Micropost pages micropost destruction as correct user should delete a micropost
+rspec ./spec/models/user_spec.rb:172 # User micropost associations status feed 
+rspec ./spec/models/user_spec.rb:174 # User micropost associations status feed 
+rspec ./spec/models/user_spec.rb:175 # User micropost associations status feed 
+rspec ./spec/models/user_spec.rb:173 # User micropost associations status feed 
+
+
+
+

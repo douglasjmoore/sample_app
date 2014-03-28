@@ -1,0 +1,64 @@
+
+Listing 11.15. Testing for reverse relationships.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  it { should respond_to(:reverse_relationships) }
+  it { should respond_to(:followers) }
+  .
+  .
+  .
+
+  describe "following" do
+    .
+    .
+    .
+    it { should be_following(other_user) }
+    its(:followed_users) { should include(other_user) }
+
+    describe "followed user" do
+      subject { other_user }
+      its(:followers) { should include(@user) }
+    end
+    .
+    .
+    .
+  end
+end
+
+
+
+Failures:
+
+  1) User 
+     Failure/Error: it { should respond_to(:reverse_relationships) }
+       expected #<User id: nil, name: "Example User", email: "user@example.com", created_at: nil, updated_at: nil, password_digest: "$2a$04$L2SV6qXdwUUrUAe0fy2DneWKiEm.f5/UBc4ibmyJ2TCN...", remember_token: nil, admin: false> to respond to :reverse_relationships
+     # ./spec/models/user_spec.rb:25:in `block (2 levels) in <top (required)>'
+
+  2) User 
+     Failure/Error: it { should respond_to(:followers) }
+       expected #<User id: nil, name: "Example User", email: "user@example.com", created_at: nil, updated_at: nil, password_digest: "$2a$04$sIjlKoZKiuolHwPBs56HA.vmyJLKnJilF.pWCmkStcS2...", remember_token: nil, admin: false> to respond to :followers
+     # ./spec/models/user_spec.rb:26:in `block (2 levels) in <top (required)>'
+
+  3) User following followed user followers 
+     Failure/Error: its(:followers) { should include(@user) }
+     NoMethodError:
+       undefined method `followers' for #<User:0xcaef478>
+     # ./spec/models/user_spec.rb:184:in `block (4 levels) in <top (required)>'
+
+Finished in 6.69 seconds
+167 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/models/user_spec.rb:25 # User 
+rspec ./spec/models/user_spec.rb:26 # User 
+rspec ./spec/models/user_spec.rb:184 # User following followed user followers 
+

@@ -1,0 +1,54 @@
+
+Listing 11.5. Testing the user/relationships belongs_to association.
+subl spec/models/relationship_spec.rb
+
+describe Relationship do
+  .
+  .
+  .
+  describe "follower methods" do
+    it { should respond_to(:follower) }
+    it { should respond_to(:followed) }
+    its(:follower) { should eq follower }
+    its(:followed) { should eq followed }
+  end
+end
+
+
+
+Failures:
+
+  1) Relationship follower methods 
+     Failure/Error: it { should respond_to(:follower) }
+       expected #<Relationship id: nil, follower_id: 151, followed_id: 152, created_at: nil, updated_at: nil> to respond to :follower
+     # ./spec/models/relationship_spec.rb:15:in `block (3 levels) in <top (required)>'
+
+  2) Relationship follower methods 
+     Failure/Error: it { should respond_to(:followed) }
+       expected #<Relationship id: nil, follower_id: 151, followed_id: 152, created_at: nil, updated_at: nil> to respond to :followed
+     # ./spec/models/relationship_spec.rb:16:in `block (3 levels) in <top (required)>'
+
+  3) Relationship follower methods follower 
+     Failure/Error: its(:follower) { should eq follower }
+     NoMethodError:
+       undefined method `follower' for #<Relationship:0xbbc4dcc>
+     # ./spec/models/relationship_spec.rb:17:in `block (3 levels) in <top (required)>'
+
+  4) Relationship follower methods followed 
+     Failure/Error: its(:followed) { should eq followed }
+     NoMethodError:
+       undefined method `followed' for #<Relationship:0x8b64e20>
+     # ./spec/models/relationship_spec.rb:18:in `block (3 levels) in <top (required)>'
+
+Finished in 6.51 seconds
+154 examples, 4 failures
+
+Failed examples:
+
+rspec ./spec/models/relationship_spec.rb:15 # Relationship follower methods 
+rspec ./spec/models/relationship_spec.rb:16 # Relationship follower methods 
+rspec ./spec/models/relationship_spec.rb:17 # Relationship follower methods follower 
+rspec ./spec/models/relationship_spec.rb:18 # Relationship follower methods followed 
+
+
+

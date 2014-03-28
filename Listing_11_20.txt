@@ -1,0 +1,49 @@
+
+Listing 11.20. A partial for displaying follower stats.
+###CREATE
+sub app/views/shared/_stats.html.erb
+
+subl app/views/shared/_stats.html.erb
+
+<% @user ||= current_user %>
+<div class="stats">
+  <a href="<%= following_user_path(@user) %>">
+    <strong id="following" class="stat">
+      <%= @user.followed_users.count %>
+    </strong>
+    following
+  </a>
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers" class="stat">
+      <%= @user.followers.count %>
+    </strong>
+    followers
+  </a>
+</div>
+
+
+
+
+
+Failures:
+
+  1) Static pages Home page for signed-in users follower/following counts 
+     Failure/Error: it { should have_link("0 following", href: following_user_path(user)) }
+       expected #has_link?("0 following", {:href=>"/users/61/following"}) to return true, got false
+     # ./spec/requests/static_pages_spec.rb:88:in `block (5 levels) in <top (required)>'
+
+  2) Static pages Home page for signed-in users follower/following counts 
+     Failure/Error: it { should have_link("1 followers", href: followers_user_path(user)) }
+       expected #has_link?("1 followers", {:href=>"/users/61/followers"}) to return true, got false
+     # ./spec/requests/static_pages_spec.rb:89:in `block (5 levels) in <top (required)>'
+
+Finished in 7.2 seconds
+169 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/requests/static_pages_spec.rb:88 # Static pages Home page for signed-in users follower/following counts 
+rspec ./spec/requests/static_pages_spec.rb:89 # Static pages Home page for signed-in users follower/following counts 
+
+
+

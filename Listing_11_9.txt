@@ -1,0 +1,32 @@
+
+Listing 11.9. A test for the user.followed_users attribute.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  .
+  .
+  .
+end
+
+Failures:
+
+  1) User 
+     Failure/Error: it { should respond_to(:followed_users) }
+       expected #<User id: nil, name: "Example User", email: "user@example.com", created_at: nil, updated_at: nil, password_digest: "$2a$04$C.5fva1iycXAYmCHgLbpxeI47Vg9lFqrJyLxqLoZqLEi...", remember_token: nil, admin: false> to respond to :followed_users
+     # ./spec/models/user_spec.rb:24:in `block (2 levels) in <top (required)>'
+
+Finished in 6.88 seconds
+157 examples, 1 failure
+
+Failed examples:
+
+rspec ./spec/models/user_spec.rb:24 # User 
+
+

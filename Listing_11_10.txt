@@ -1,0 +1,13 @@
+
+Listing 11.10. Adding the User model followed_users association.
+subl app/models/user.rb
+
+class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_users, through: :relationships, source: :followed
+  .
+  .
+  .
+end
+

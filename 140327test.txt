@@ -1,0 +1,2498 @@
+http://blog.jdpfu.com/2012/09/14/solution-for-slow-ubuntu-in-virtualbox
+http://blog.jdpfu.com/2011/06/24/system-maintenance-for-linux-pcs
+
+sudo apt-get install curl
+sudo apt-get update
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
+source ~/.rvm/scripts/rvm
+rvm use ruby-2.0.0-p353
+ruby -v
+subl ~/.gemrc and added next to lines to file
+install: --no-rdoc --no-ri
+update:  --no-rdoc --no-ri
+gem install rails --version 4.0.2
+rails -v
+mkdir rails_projects
+cd rails_projects
+rails new first_app
+cd first_app/
+subl Gemfile with changes
+ruby '2.0.0'
+#ruby-gemset=railstutorial_rails_4_0
+gem 'jquery-rails', '3.0.4'
+group :development do
+  gem 'sqlite3', '1.3.8'
+end
+gem 'sass-rails',   '4.0.0'
+gem 'uglifier', '2.1.1'
+gem 'coffee-rails', '4.0.1'
+END CHANGES
+bundle update
+bundle install
+
+bundle install --without production
+rails server
+http://localhost:3000/
+sudo ./bashrc (force_color_prompt=yes)
+FROM http://stackoverflow.com/questions/16302436/install-nodejs-on-ubuntu-12-10
+sudo apt-get install python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+
+git config --global user.name "Doug Moore"
+git config --global user.email douglas_j_moore@mail.com
+git config --global alias.co checkout
+git config --global core.editor "subl -w"
+git init
+subl .gitignore
+git add .
+git commit -m "Initialize repository"
+git log (To exit git log, you may have to type q to quit.)
+
+https://help.github.com/articles/generating-ssh-keys
+cd ~/.ssh
+NOT NEEDED ls
+To generate a new SSH key
+ssh-keygen -t rsa -C "douglas_j_moore@mail.com"
+The phase is I want to go home!!!
+
+Your identification has been saved in /home/dougm/.ssh/id_rsa.
+Your public key has been saved in /home/dougm/.ssh/id_rsa.pub.
+The key fingerprint is:
+2b:5d:0f:f2:e4:ce:60:f0:3d:c3:28:8d:17:f6:02:17 douglas_j_moore@mail.com
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|                 |
+|        E        |
+|         .       |
+|      o S +      |
+|       X & o     |
+|      + @ O .    |
+|       = = o     |
+|          o      |
++-----------------+
+
+sudo apt-get install xclip
+# Downloads and installs xclip. If you don't have `apt-get`, you might need to use another installer (like `yum`)
+
+xclip -sel clip < ~/.ssh/id_rsa.pub
+# Copies the contents of the id_rsa.pub file to your clipboard
+#Went to https://github.com/settings and did new key (MOVE)
+ssh -T git@github.com
+# Attempts to ssh to github
+GOT
+The authenticity of host 'github.com (192.30.252.129)' can't be established.
+RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.25git branch
+2.129' (RSA) to the list of known hosts.
+Connection closed by 192.30.252.129
+#you have to be in Project folder
+git remote add origin https://github.com/douglasjmoore/first_app.git
+git push -u origin master
+
+git checkout -b modify-README
+git branch
+git mv README.rdoc README.md (MOVE)
+git commit -a -m "Improve the README file"
+git checkout master
+git merge modify-README
+git branch -d modify-README
+
+git checkout -b topic-branch
+<really screw up the branch>
+git add .
+git commit -a -m "Major screw up"
+git checkout master
+git branch -D topic-branch
+git remote set-url origin git@github.com:douglasjmoore/first_app.git
+bundle install --without production
+git commit -a -m "Update Gemfile.lock for Heroku"
+git commit -a -m "Update Gemfile.lock for Heroku"
+#download heroku tools
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku logon
+heroku create
+#http://salty-headland-8402.herokuapp.com/
+#http://salty-headland-8402.herokuapp.com/ | git@heroku.com:salty-headland-8402.git
+git push heroku master
+CHAPTER 2
+cd ~/rails_projects
+rails new demo_app
+cd demo_app
+#Edit in demo_app - gemfile (Was Blank) it same as first_app now
+bundle install --without production
+bundle update
+bundle install
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/douglasjmoore/demo_app.git
+git push -u origin master
+https://github.com/douglasjmoore/demo_app.git/info/refs
+#edit .git/config file under your repo directory
+url = https://github.com/douglasjmoore/demo_app.git
+TO
+url = ssh://git@github.com/douglasjmoore/demo_app.git
+did
+git push -u origin master (FAILED but asked for Phase)
+git remote add origin ssh://git@github.com/douglasjmoore/demo_app.git
+git push -u origin master
+git remote set-url origin git@github.com:douglasjmoore/demo_app.git
+git remote -v
+git remote rm origin
+git remote -v
+git remote add origin git@github.com:douglasjmoore/demo_app.git
+git remote -v
+git config master.remote origin
+git config master.merge refs/heads/master --replace-all
+git push
+CREATE it on GITHUB demo_app
+git remote add origin git@github.com:douglasjmoore/demo_app.git
+git push -u origin master
+rails generate scaffold User name:string email:string
+NOTE: DID Box 2.1
+ ./configure && make && sudo make install (FAILED)
+bundle exec rake db:migrate
+rails s
+LOOKED AT
+subl app/controllers/users_controller.rb
+subl app/models/user.rb
+subl app/views/users/index.html.erb
+subl config/routes.rb
+
+#2.3 Micropost
+rails generate scaffold Micropost content:string user_id:integer
+bundle exec rake db:migrate
+subl config/routes.rb
+subl app/controllers/microposts_controller.rb
+rails s
+ADD 2 micropost users
+subl app/models/micropost.rb
+AND Changed to
+class Micropost < ActiveRecord::Base
+validates :content, length: { maximum: 140 }
+end
+subl app/models/user.rb
+class User < ActiveRecord::Base
+has_many :microposts
+end
+
+subl app/models/micropost.rb
+class Micropost < ActiveRecord::Base
+belongs_to :user
+validates :content, length: { maximum: 140 }
+end
+
+rails console
+first_user = User.first
+first_user.microposts
+exit
+subl app/controllers/users_controller.rb
+subl app/controllers/microposts_controller.rb
+subl app/controllers/application_controller.rb
+PUSH to GIT
+git add .
+git commit -m "Finish demo app"
+git push
+PUSH to HEROKU - Production?????
+heroku create
+git push heroku master (FAILED)
+
+
+git remote -v
+FIX Gemfile
+bundle update
+bundle install
+git add .
+git commit -m "Redo the Finish of demo app"
+git push
+PUSH to HEROKU - Production?????
+git push heroku master
+heroku run rake db:migrate
+
+###Chapter3
+cd ~/rails_projects
+rails new sample_app --skip-test-unit
+cd sample_app
+###Gemfile changes Listing 3.1 or 9.47
+bundle install --without production
+bundle update
+bundle install
+### .gitignore
+### Change config/initializers/secret_token.rb
+subl config/initializers/secret_token.rb
+rails generate rspec:install (FAILED)
+###Gemfile changes added next
+gem "rake", "~> 10.1.1"
+bundle update
+bundle install
+git init
+git add .
+git commit -m "Initial commit for sample_app"
+FROM GEN REPO
+git@github.com:douglasjmoore/sample_app.git
+touch README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:douglasjmoore/sample_app.git
+git push -u origin master
+END
+git remote add origin git@github.com:douglasjmoore/sample_app.git
+git push -u origin master
+#Modified and copied README.rdoc to README.md (git mv README.rdoc README.md)
+git rm README.rdoc
+git commit -am "Improve the README - README.md"
+131223 - Did System Maintenance for Linux PCs
+sudo apt-get update; sudo apt-get dist-upgrade
+heroku create
+git push heroku master
+heroku run rake db:migrate
+heroku logs
+subl .
+###OPEN branch
+git checkout -b static-pages
+###Generating a StaticPages controller.
+rails generate controller StaticPages home help --no-test-framework
+git add .
+git commit -m "Add a StaticPages controller for help and home"
+rails generate integration_test static_pages
+Changed spec/requests/static_pages_spec.rb like listing 3.9
+Could not find spec/spec_helper.rb
+rails s
+rails generate rspec:install (It should been run before to generate spec/spec_helper.rb)
+# IN spec/spec_helper.rb added to end [config.include Capybara::DSL]
+bundle exec rspec spec/requests/static_pages_spec.rb (Failed as expected)
+#Changed app/views/static_pages/home.html.erb like listing 3.11
+bundle exec rspec spec/requests/static_pages_spec.rb
+#Changed spec/requests/static_pages_spec.rb like listing 3.12
+#Changed app/views/static_pages/help.html.erb like listing 3.13
+bundle exec rspec spec/requests/static_pages_spec.rb
+#Changed spec/requests/static_pages_spec.rb like listing 3.14
+bundle exec rspec spec/requests/static_pages_spec.rb
+#Changed config/routes.rb like listing 3.15
+bundle exec rspec spec/requests/static_pages_spec.rb
+#Changed app/controllers/static_pages_controller.rb like listing 3.16
+bundle exec rspec spec/requests/static_pages_spec.rb
+#ADDED app/views/static_pages/about.html.erb like listing 3.17
+bundle exec rspec spec/requests/static_pages_spec.rb
+rails s to see http://localhost:3000/static_pages/home-about-help
+git add .
+git commit -m "Update StaticPages controller for help,about, and home"
+#SAVED Clone10
+###Chapter3 at 3.3
+mv app/views/layouts/application.html.erb foobar (Saves file at root of project)
+subl spec/requests/static_pages_spec.rb and dumped in listing 3.19
+bundle exec rspec spec/requests/static_pages_spec.rb
+subl app/views/static_pages/home.html.erb
+subl app/views/static_pages/help.html.erb
+subl app/views/static_pages/about.html.erb
+mv foobar app/views/layouts/application.html.erb (Restore file for changes)
+subl foobar app/views/layouts/application.html.erb
+#UPDATE home/help/about with HTML removed listings 3.27/3.28/3.29
+###Verify with firefox and commit our changes and merge them into the master branch.
+git add .
+git commit -m "Finish static pages in 3.4"
+git checkout master
+git merge static-pages
+###push your code up to a remote repository
+git push
+### To git@github.com:douglasjmoore/sample_app.git
+###   b2afd02..65542ae  master -> master
+git push heroku
+### To git@heroku.com:pacific-caverns-1669.git
+###   d35cc12..65542ae  master -> master
+### Shutdown and SAVED Clone11
+### Update spec/requests/static_pages_spec.rb and add Contact page to testing
+#Forgot to branch so undid file changes
+git checkout -- spec/requests/static_pages_spec.rb
+#Got that the code was clean
+###OPEN branch
+git checkout -b example-static-pages
+### Update spec/requests/static_pages_spec.rb and add Contact page to testing
+bundle exec rspec spec/requests/static_pages_spec.rb
+#OTHER File that will need to change and ran test
+subl config/routes.rb
+subl app/controllers/static_pages_controller.rb
+#Create app/views/static_pages/contact.html.erb
+subl app/views/static_pages/contact.html.erb
+git add app/views/static_pages/contact.html.erb
+git add .
+git commit -m "Ch3.5 exercise 1"
+subl the Gemfile
+#Change spec/requests/static_pages_spec.rb like listing 3.31
+###Saved clone12
+# Looked at http://devcenter.heroku.com/articles/local-postgresql
+Changed Gemfile to remove   gem 'sqlite3', '1.3.8' and move  gem 'pg', '0.15.1' from production to main
+bundle update (Failed)
+gem install pg -v '0.15.1' (Failed)
+gem install pg (Failed)
+ls -R pg_config (Failed)
+sudo apt-get install postgresql
+which psql
+heroku pg:info
+#GOT
+#Connecting to HEROKU_POSTGRESQL_MAROON_URL (DATABASE_URL)
+#psql (9.1.11, server 9.3.2)
+#WARNING: psql version 9.1, server version 9.3.
+gem install pg (Failed)
+sudo apt-get install libpq-dev
+gem install pg
+bundle update
+bundle install
+#Changed database.yml
+bundle exec rspec spec/requests/static_pages_spec.rb (Unknown)
+psql -h localhost ??? PASSWORD
+which psql
+heroku addons | grep POSTGRES
+heroku addons:add heroku-postgresql:dev
+heroku pg:wait (failed)
+psql -h localhost ??? PASSWORD
+Could not get to work so
+#Changed database.yml back and Gemfile
+git checkout -- Gemfile
+bundle update
+bundle install
+bundle exec rspec spec/requests/static_pages_spec.rb
+git status - Gemfile.lock and  spec/requests/static_pages_spec.rb
+Skip to 3.6 to play some
+rvm -v
+rspec spec/requests/static_pages_spec.rb
+Changed Gemfile to uncomment # gem 'guard-rspec', '2.5.0'
+bundle update
+bundle install
+git status - Gemfile.lock and  spec/requests/static_pages_spec.rb
+###Stopped 131229
+bundle exec guard init rspec
+# Changes for Guardfile from listing 3.35
+bundle exec guard (It was like a command prompt but what to do with it)
+### Changed config/routes.rb to create a failure to see what would do
+bundle exec guard (It was like a command prompt but what to do with it and how to rerun)
+### Changed config/routes.rb to remove error to see what would do
+Changed Gemfile to uncomment
+	# gem 'spork-rails', '4.0.0'
+ 	# gem 'guard-spork', '1.5.0'
+  	# gem 'childprocess', '0.3.6'
+bundle update
+bundle install
+bundle exec spork --bootstrap
+subl spec/spec_helper.rb
+###Start 140101
+Worked on spec/spec_helper.rb with Listing 3.37
+cd spec
+cp spec_helper.rb spec_helper_org.rb
+cd ..
+rspec --help
+time bundle exec rspec spec/requests/static_pages_spec.rb
+bundle exec spork (Does it end or What - No, need run tests in separate terminal window)
+time bundle exec rspec spec/requests/static_pages_spec.rb --drb
+###edit .rspec to add --drb
+	#-d, --debugger                   Enable debugging.
+	#-r, --require PATH               Require a file.
+	#-b, --backtrace                  Enable full backtrace.
+### END
+# Changes for Guardfile from listing 3.39 (Why in file not in color)
+bundle exec guard init spork
+bundle exec guard
+time bundle exec rspec spec/requests/static_pages_spec.rb
+###FROM https://github.com/maltize/sublime-text-2-ruby-tests
+cd ~/.config/sublime-text-2/Packages/
+git clone https://github.com/maltize/sublime-text-2-ruby-tests.git RubyTest
+### Could not understand cd ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User/
+###STOP 140101 Start 140102
+### Found file /home/dougm/rails_projects/sample_app/app/assets/stylesheets/application.css from page 171-It seemed only comment
+~/rails_projects/sample_app/app/views/static_pages/home.html.erb
+subl app/helpers/application_helper.rb
+### made file have full_title and if no title. like listing 4.2 and did some testing
+rspec spec/requests/static_pages_spec.rb
+rails s
+edited /home/dougm/rails_projects/sample_app/app/views/layouts/application.html.erb (I tried commenting code but the three way all had issues)
+how to comment .erb file
+
+Changed
+	spec/requests/static_pages_spec.rb
+	app/views/static_pages/home.html.erb
+	app/views/static_pages/help.html.erb
+	app/views/static_pages/about.html.erb
+	app/views/static_pages/contact.html.erb
+END
+.length
+.empty?
+.nil?
+to_s  TO STRING
+.split by white space
+"fooxbarxbazx".split('x') Split on character x but last may not be needed
+a = [42, 8, 17]
+.first
+.second etc
+a.last == a[-1]  compare works here
+.sort
+a.push(6) or a<<7
+a.pop # removes last
+.join
+.split
+(0..9).to_a
+(a..i).to_a NO-NO
+('a'..'i').to_a
+.join
+a = 42, 8, 17, 7, "foo", "bar"
+s = Food
+t = foobarx
+a.join
+a.join('; ')
+0..9
+(0..9).to_a
+y = %w[foo bar baz quux]
+a[0..2]
+###Can NOT sort numbers and letters together ####
+(1..5).each { |i| puts 2 * i }
+(1..5).each do |i|
+puts 2 * i
+end
+s = String.new("foobar")
+s.class # Find the class of s.
+s.class.superclass # Find the superclass of String.
+s.class.superclass.superclass # Ruby 1.9 uses a new BasicObject base class
+s.class.superclass.superclass.superclass
+ y
+ => ["foo", "bar", "baz", "quux", "tom", "7"]
+y.join #for letters just one string
+y.reverse # order
+y.shuffle # mix order
+y.sort!
+# The ! (Bang Method) at the end will change to variable array or mutate the array. Without it the variable will be unchanged.
+3.times { puts "Betelgeuse!" }
+%w[a b c].map { |char| char.upcase }
+%w[A B C w].map { |char| char.downcase }
+####hashes aren’t limited to integer indices. called associative arrays in Perl etc
+aren’t limited to integer indices. (In fact,
+some languages, especially Perl, sometimes call hashes associative arrays for
+this reason.) Instead, hash indices, or keys, can be almost any object. Forthis reason.) Instead, hash indices, or keys, can be almos
+t any object. For
+example, we can use strings as keys:
+user = {}
+user["first_name"] = "Mike"
+user["last_name"] = "Walker"
+user["first_name"]
+user
+"name".split('')  # take NAME and splits to single characters
+flash = { success: "It worked!", error: "It failed." }
+flash.each do |key, value|
+puts "Key #{key.inspect} has value of #{value.inspect}"
+end
+puts (1..5).to_a
+puts (1..5).to_a.inspect
+puts "It worked I think!", "It worked!".inspect
+p :name
+4.4.1
+s = "foobar"
+s.class.superclass.etc
+t = String.new("foobar")
+s == "foobar"
+t == "foobar"
+a = Array.new([1, 3, 2])
+h = Hash.new
+h[:foo]
+h = Hash.new(0) # Will return 0 and not NIL
+class Word
+def palindrome?(string)
+string == string.reverse
+end
+end
+w = Word.new
+w.palindrome?("foobar")
+w.palindrome?("level")
+w.palindrome?(level)  #BAD
+"level".palindrome?
+# Within a class
+class String
+  # Returns true if the string is its own reverse.
+  def Spalindrome?
+    self == self.reverse
+  end
+end
+"deified".Spalindrome?
+"".blank?
+"      ".empty?
+"      ".blank?
+nil.blank?
+###made file example_user.rb
+require './example_user'     # This is how you load the example_user code.
+example = User.new
+example.name                 # nil since attributes[:name] is nil
+example.name = "Example User"           # Assign a non-nil name
+example.email = "user@example.com"      # and a non-nil email address
+example.formatted_email
+user = User.new(name: "Mike Wartl", email: "mwhartl@example.com")
+user.formatted_email
+rm example_user.rb  #remove file
+# at 4.5 commit the other changes to the main source code repository:
+git status
+git add .
+git commit -m "Add a full_title helper before exercises at 4_6"
+t="foodtype"
+t.split('')
+t.split('').shuffle
+def string_shuffle(s)
+  s.split('').shuffle.join
+end
+string_shuffle("foobar")
+string_shuffle("foodtype")
+class String
+  def shuffle
+    self.split('').shuffle.join
+  end
+end
+###Start Chapter 5 with a new clone15_before_Chap5
+###System Maintenance for Linux
+sudo apt-get update; sudo apt-get dist-upgrade
+cd ~/rails_projects/sample_app
+git checkout -b filling-in-layout-chap-5
+#Listing_5_1.txt
+#Listing_5_2.txt
+#config/application.rb to add listing 5.4 and config time zone
+subl app/assets/stylesheets/custom.css.scss #creates file and add line and listing 5.6/5.7/5.8
+@import "bootstrap";
+#listing 5.10/5.11/5.09 work
+subl app/views/layouts/_shim.html.erb #Added file
+subl app/views/layouts/_header.html.erb
+subl app/views/layouts/application.html.erb
+#add file from listing 5.12/5.13
+subl app/views/layouts/_footer.html.erb
+subl app/views/layouts/application.html.erb
+#update app/assets/stylesheets/custom.css.scss with combining stuff
+STOP 140110.1
+FIND
+Applying the Sass nesting and variable
+find -name cus*
+for /custom.css.scss rename to make smaller
+cd app/assets/stylesheets
+cp custom.css.scss custom_tmp.css.scss
+bundle exec rspec spec/requests/static_pages_spec.rb
+spec/requests/static_pages_spec.rb Change
+	visit '/static_pages/home'
+	visit root_path
+config/routes.rb
+match '/home', to: 'static_pages#home', via: 'get'
+match '/', to: 'static_pages#home', via: 'get'
+subl spec/requests/static_pages_spec.rb
+match '/help', to: 'static_pages#help', via: 'get'
+#update app/views/static_pages/contact.html.erb listing 5.21
+#update app/views/layouts/_footer.html.erb listing 5.22
+#update spec/requests/static_pages_spec.rb listing 5.23
+Sec 5.3.2 Rails routes
+#update config/routes.rb listing 5.24/5.25/5.26
+Sec 5.3.3 Named routes
+#update app/views/layouts/_header.html.erb with listing 5.27
+subl app/views/layouts/_footer.html.erb
+#update app/views/layouts/_footer.html.erb listing 5.28
+mkdir spec/support
+subl spec/support/utilities.rb like listing 5.29
+# Shorted spec/requests/static_pages_spec.rb like listing 5.30
+Sec 5.4 User signup: A first step
+# user created by Listing 5.31
+rails generate controller Users new --no-test-framework
+subl app/controllers/users_controller.rb (Code was there like Listing 5.32)
+subl app/views/users/new.html.erb (Code was there like Listing 5.33)
+Sec 5.4.2 Signup URL
+rails generate integration_test user_pages
+spec/requests/user_pages_spec.rb #Listing 5.34 for testing
+bundle exec rspec spec/requests/user_pages_spec.rb
+subl config/routes.rb #Listing 5.35 for routing
+subl app/views/users/new.html.erb #Listing 5.36 for Page work (Should pass now)
+bundle exec rspec spec/requests/user_pages_spec.rb
+subl app/views/static_pages/home.html.erb #Linting 5.37 for linking button
+bundle exec rspec spec/requests/user_pages_spec.rb
+bundle exec rspec spec/requests/
+bundle exec rspec spec/
+bundle exec rake spec
+cd ~/rails_projects/sample_app
+git status
+# get all ready to commit and do it to master
+git add .
+git commit -m "Finish layout and routes Chap-5"
+git checkout master
+git merge filling-in-layout-chap-5
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+To git@github.com:douglasjmoore/sample_app.git
+   65542ae..c93e834  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   65542ae..c93e834  master -> master
+heroku open
+heroku logs
+###Before Chapter 5 Execises with a new clone16_before_Chap5_Exercises
+5.6 Exercises
+cd ~/rails_projects/sample_app
+git checkout -b chap-5-exercises
+###exercise 1
+#update  listing 5.38
+subl spec/requests/static_pages_spec.rb
+bundle exec rspec spec/
+temporarily comment out the “Contact” line in the footer to avoid an erroneous passing test (Listing 5.18).
+subl app/views/layouts/_footer.html.erb
+subl app/views/static_pages/contact.html.erb
+# Got it to fail and pass as expected or not expected - Changed home page the fail if footer was commented out - Contact did not stop it
+###exercise 2
+subl Listing_5_39.txt
+subl spec/requests/static_pages_spec.rb
+# Got all (user/static) to use stye from listing 5.39
+subl app/views/layouts/_header.html.erb
+subl Listing_5_40.txt
+mkdir spec/helpers
+subl spec/helpers/application_helper_spec.rb
+subl spec/support/utilities.rb
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+# get all ready to commit and do it to master
+git add .
+git commit -m "Finished layout and routes Chap-5-exercises"
+git checkout master
+git merge chap-5-exercises
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+To git@github.com:douglasjmoore/sample_app.git
+   c93e834..155a866  master -> master### 
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   c93e834..155a866  master -> master
+#### Stop 140115
+###Update Linux OS
+sudo apt-get update; sudo apt-get dist-upgrade
+Chapter 6 Modeling users
+### Start Chapter 6 Modeling users
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###Since I was at end of Chap 5 before I looked at Chap 6 I pushed branch work to master-So there no going back
+git status
+###Would DO nothing### git checkout master
+git checkout -b modeling-users-chap-6
+rails generate model User name:string email:string
+###GOT create for
+	db/migrate/20140117155224_create_users.rb
+    app/models/user.rb
+    spec/models/user_spec.rb
+subl db/migrate/20140117155224_create_users.rb
+subl app/models/user.rb
+subl spec/models/user_spec.rb
+bundle exec rake -T db
+rake db:migrate:status
+git status
+bundle exec rake -T
+bundle exec rake db:migrate
+rake db:migrate:status
+rails console --sandbox
+User.new
+user = User.new(name: "Mike Hartl", email: "mhartl@example.com")
+user.save
+user
+user.name
+user.email
+user.updated_at
+user.created_at
+User.create(name: "Another Email", email: "another.email@example.org")
+foo = User.create(name: "Foo", email: "foo@bar.com")
+food = User.create(name: "Food")
+foo.destroy
+foo
+User.find(1)
+User.find(2)
+User.find(3)
+User.find(4)
+User.find_by_email("mhartl@example.com")
+User.find_by_updated_at("2014-01-17 18:41:38") #Did not work
+User.find_by_updated_at(20140117184138) #Did not work
+2014-01-17 18:41:38
+20140117184138
+###COMMANDS###
+.create
+.find(#)
+.find_by_email("XXXX")
+.find_by_name("XXXX")
+###Did not work
+.find_by_updated_at("DATE")
+.find_by_created_at
+###COMMANDS###
+User.find_by(email: "another.email@example.org")
+User.first
+User.all
+user
+user.email = "foo@bar.com"
+user.reload.email
+user.created_at
+user.updated_at
+User.find(2).created_at  ###works
+user.update_attributes(name: "The Dude", email: "dude@abides.org")
+user.name
+user.email
+user.update_attributes(:name, "The Dude 2", :email, "dude2@abides.org") ####NO GO
+user.update_attribute(:name, "The Dude 2")
+####Exit with CTRL-D
+bundle exec rake db:migrate
+bundle exec rake test:prepare
+bundle exec rspec spec/models/user_spec.rb
+subl spec/models/user_spec.rb
+subl Listing_6_5.txt
+bundle exec rspec spec/models/user_spec.rb
+rails console --sandbox
+user = User.new
+user
+user.respond_to?(:name)
+user.respond_to?(:foobar)
+user.respond_to?(:created_at)
+####Exit with exit
+bundle exec rspec spec/
+###STOP 
+6.2.2 Validating presence
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl app/models/user.rb
+rails console --sandbox
+user = User.new(name: "", email: "mhartl@example.com")
+user.save
+user.valid?
+user.errors.full_messages
+user = User.new(name: "Mike Hartl", email: "mhartl@example.com")
+user.save
+user.valid?
+user.errors.full_messages
+####Exit with exit
+subl Listing_6_8.txt
+bundle exec rspec spec/models/user_spec.rb
+#Did to listing 6_11 - It failed as expected
+#Stopped
+6.2.4 Format validation
+sudo apt-get update; sudo apt-get dist-upgrade
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails console --sandbox
+%w[foo bar baz]
+addresses = %w[user@foo.COM THE_US-ER@foo.bar.org first.last@foo.jp]
+addresses.each do |address|
+   puts address
+end
+####Exit with exit
+subl Listing_6_13.txt
+subl Listing_6_14.txt
+bundle exec rspec spec/
+/[\w+\-.]+@[a-z\d\-.]+\.[a-z]+/i
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl Listing_6_15.txt
+subl Listing_6_17.txt
+rails console --sandbox
+user = User.create(name: "Example User", email: "user@example.com")
+user.email.upcase
+user_with_same_email = user.dup
+user_with_same_email.email = user.email.upcase
+user_with_same_email.valid?
+####Exit with exit
+bundle exec rspec spec/
+rails generate migration add_index_to_users_email
+subl Listing_6_19.txt
+subl db/migrate/20140118130737_add_index_to_users_email.rb
+bundle exec rake db:migrate
+####LOOK for
+email.downcase
+cd ~/rails_projects/sample_app
+###Need to rollback??????
+bundle exec rake -T db
+##Need bundle exec ?????
+rake db:migrate:status #was create plus one
+rake db:rollback
+rake db:migrate VERSION=0
+rake db:drop
+bundle exec rake -T db
+##Need bundle exec 
+bundle exec rake db:migrate:status
+bundle exec rake db:create ### Was not needed/Failed
+bundle exec rake db:migrate
+bundle exec rspec spec/
+bundle exec rake test:prepare #This was what got DB back
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###Before Chapter 6 (6.3 Adding a secure password) with a new clone17_before_Chap6_3_password
+6.3 Adding a secure password
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+#From Listing 6.22
+it { should respond_to(:password_digest) } # Added
+bundle exec rspec spec/ # failed since password_digest NOT add yet
+rails generate migration add_password_digest_to_users password_digest:string
+Was created
+subl db/migrate/20140121001309_add_password_digest_to_users.rb
+#To get to pass must migrate it to test DB
+bundle exec rake db:migrate
+bundle exec rake test:prepare
+bundle exec rspec spec/ #passed
+subl Listing_6_24.txt
+subl Listing_6_25.txt
+###ADD has_secure_password to user.rb (321)
+Stop 140120 and FIND NEXT TIME
+authenticate method
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl spec/models/user_spec.rb
+Enlightenment_and_Terminology.txt
+###// Add repository to the place 
+sudo apt-add-repository ppa:efl/trunk
+###// update the library with all products
+sudo apt-get update
+####// add the e17 desktop and the terminology terminal emulator
+sudo apt-get install e17 terminology
+subl Enlightenment_and_Terminology.txt
+### When I tried it want do bundle install?????
+subl Listing_6_28.txt
+subl Listing_6_29.txt
+subl config/application.rb #I18n.enforce_available_locales = true
+###Create Users
+rails console #In console
+User.create(name: "Michael Hartl", email: "mhartl@example.com", password: "foobar", password_confirmation: "foobar")
+user = User.find_by(email: "mhartl@example.com")
+user.password_digest
+user.authenticate("invalid")
+user.authenticate("foobar")
+exit
+git status
+# get all ready to commit and do it to master
+git add .
+git commit -m "Before 6_5 Exercises"
+git checkout master
+git merge modeling-users-chap-6
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+To git@github.com:douglasjmoore/sample_app.git
+   155a866..e700c95  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   155a866..e700c95  master -> master
+###6_5 Exercises
+git checkout -b modeling-users-chap-6_Exercises
+subl Listing_6_30.txt
+bundle exec rspec spec/
+#####6.5 Exercises
+For File [app/models/user.rb]
+For File [spec/models/user_spec.rb]
+subl Listing_6_32.txt
+#started with
+[\w+\-.]+@[a-z\d\-.]+\.[a-z]+
+#the dot right after the @?
+# the (*) means zero or more (\.[a-z]+)
+[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+
+#need look at
+([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})
+user@foo,com
+user_at_foo.org
+example.user@foo.
+foo@bar_baz.com
+foo@bar+baz.com
+foo@bar..com
+git status
+# get all ready to commit and do it to master
+git add .
+git commit -m "After 6_5 Exercises"
+git checkout master
+git merge modeling-users-chap-6_Exercises
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+To git@github.com:douglasjmoore/sample_app.git
+   e700c95..1c8374c  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   e700c95..1c8374c  master -> master
+###Chap 7
+git checkout -b sign-up-chap-7
+###Update Linux OS
+sudo apt-get update; sudo apt-get dist-upgrade
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###Before Chapter 7 with a new clone18_before_Chap7_sign-up
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails s
+#update  listing 7.01
+subl Listing_7_01.txt
+subl app/views/layouts/application.html.erb
+#update  listing 7.02
+subl Listing_7_02.txt
+subl app/assets/stylesheets/custom.css.scss
+### Work on box_size
+rails console
+Rails.env
+Rails.env.development?
+Rails.env.test?
+Rails.env.production?
+exit
+rails console test
+heroku run console
+### GET Ruby console for yourapp.herokuapp.com
+Rails.env
+Rails.env.production?
+exit
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails s
+subl config/routes.rb
+CREATE app/views/users/show.html.erb
+<%= @user.name %>, <%= @user.email %>
+subl app/views/users/show.html.erb
+subl Listing_7_05.txt
+subl app/controllers/users_controller.rb
+subl spec/requests/user_pages_spec.rb
+subl Listing_7_06.txt
+bundle install
+bundle update
+bundle install
+Stop for 140129
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails s
+subl Listing_7_08.txt
+subl spec/factories.rb
+subl Listing_7_09.txt
+# add listing 7.10 subl spec/requests/user_pages_spec.rb
+# fix speed for testing by lowering Bcrypt level
+subl config/environments/test.rb
+subl Listing_7_11.txt
+subl Listing_7_12.txt
+subl app/views/users/show.html.erb
+bundle exec rspec spec/
+subl Listing_7_13.txt
+subl app/helpers/users_helper.rb
+bundle exec rspec spec/
+rails s
+rails console
+user = User.first
+user.update_attributes(name: "Example User", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar")
+rails s
+bundle exec rspec spec/
+subl Listing_7_14.txt
+subl app/views/users/show.html.erb
+subl Listing_7_15.txt
+subl app/assets/stylesheets/custom.css.scss
+###remove the user created
+bundle exec rake db:reset
+bundle exec rake test:prepare
+rails console
+User.count
+exit
+subl Listing_7_16.txt
+subl spec/requests/user_pages_spec.rb
+bundle exec rspec spec/
+subl Listing_7_17.txt
+subl app/views/users/new.html.erb
+rspec --help
+bundle exec rspec spec/requests/user_pages_spec.rb -e "signup page"
+subl spec/requests/user_pages_spec.rb
+subl Listing_7_18.txt
+subl Listing_7_19.txt
+subl app/assets/stylesheets/custom.css.scss
+bundle exec rspec spec/
+rails s
+###So http://localhost:3000/users/1 is there
+Example User
+user@example.com
+foobar
+foobar
+#STOP 140130
+###During Chapter 7 with a new clone19_during_Chap7_sign-up
+The form HTML
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails s
+###Authenticity loked for token_tab and form_authenticity_token but did not find
+subl Listing_7_21.txt
+##BAD input
+test user
+testuser@example
+food
+foo
+bundle exec rspec spec/requests/user_pages_spec.rb -e "signup page with invalid information"
+bundle exec rspec spec/requests/user_pages_spec.rb -e "signup page with valid information"
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails console
+user = User.new(name: "Foo Bar", email: "foo@invalid", password: "dude", password_confirmation: "dude")
+user.save
+user.errors.full_messages
+subl Listing_7_22.txt
+subl Listing_7_23.txt
+subl app/views/users/new.html.erb
+subl Listing_7_24.txt
+subl app/views/shared/_error_messages.html.erb
+rails console
+user = User.new(name: "Foo Bar", email: "foo@invalid", password: "dude", password_confirmation: "dude")
+user.save
+user.errors.full_messages
+user
+user.errors.count
+user.errors.empty?
+user.errors.any?
+include ActionView::Helpers::TextHelper
+pluralize(1, "error")
+pluralize(5, "error")
+pluralize(2, "woman")
+pluralize(3, "erratum")
+#### CSS uses the pound sign # to style ids.
+subl Listing_7_25.txt
+subl app/assets/stylesheets/custom.css.scss
+bundle exec rspec spec/
+rails s
+test user
+testuser@example
+food
+foo
+bundle exec rspec spec/requests/user_pages_spec.rb -e "signup page with valid information"
+subl Listing_7_26.txt
+subl app/controllers/users_controller.rb
+rails console
+flash = { success: "It worked!", error: "It failed." }
+flash.each do |key, value|
+puts "#{key}"
+puts "#{value}"
+end
+subl Listing_7_27.txt
+subl app/views/layouts/application.html.erb
+subl Listing_7_28.txt
+subl app/controllers/users_controller.rb
+###remove the user created
+bundle exec rake db:reset
+bundle exec rake test:prepare
+rails s
+Rails Tutorial
+example@railstutorial.org
+rubyonrails
+rails console
+User.find_by(email: "example@railstutorial.org")
+exit
+subl Listing_7_29.txt
+subl config/environments/production.rb
+git status
+git add .
+git commit -m "Finish user signup before 7_5"
+git checkout master
+git commit -a -m "Add SSL in production"
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+To git@github.com:douglasjmoore/sample_app.git
+   1c8374c..d991cad  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   1c8374c..d991cad  master -> master
+heroku run rake db:migrate
+# This starts or open site
+heroku open
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+rubyonrailsHEROKU
+heroku logs
+#Stop all but terminal.
+bundle exec rspec spec/
+###Update Linux OS
+sudo apt-get update; sudo apt-get dist-upgrade
+#stop 140201
+allowing code like
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails s
+git checkout -b sign-up-before-chap-7_6
+git status
+subl Listing_7_30.txt
+subl app/helpers/users_helper.rb
+rails s
+subl Listing_7_31.txt
+subl spec/requests/user_pages_spec.rb
+subl Listing_7_32.txt
+subl spec/requests/user_pages_spec.rb
+subl Listing_7_33.txt
+subl app/views/layouts/application.html.erb
+rails s
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+rubyonrailsHEROKU
+Start Chapter8 by merging up to now 140208
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails s
+git status
+git add .
+git commit -m "sign-up-before-chap-7_6"
+git checkout master
+git commit -a -m "Add SSL before Chapter8"
+git merge sign-up-chap-7 (output stated already done)
+git merge sign-up-before-chap-7_6
+git commit -a -m "Add SSL before Chapter8 after merge"
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+To git@github.com:douglasjmoore/sample_app.git
+   d991cad..000152e  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   d991cad..000152e  master -> master
+heroku run rake db:migrate
+heroku open
+git checkout -b Chapter8-start
+bundle exec rspec spec/
+#STOP and SAVE
+###Before Chapter 8 with a new clone20_before_Chap8_sign-in-out
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status 
+###got branch Chapter8-start
+rails generate controller Sessions --no-test-framework
+rails generate integration_test authentication_pages
+subl spec/requests/authentication_pages_spec.rb
+bundle exec rspec spec/ (FAILED as expected)
+subl Listing_8_01.txt
+subl config/routes.rb
+subl Listing_8_02.txt
+### Generate Routes
+rake routes
+subl app/controllers/sessions_controller.rb
+subl Listing_8_03.txt
+# CREATE app/views/sessions/new.html.erb
+subl app/views/sessions/new.html.erb
+subl Listing_8_04.txt
+bundle exec rspec spec/ (Passed as expected)
+subl spec/requests/authentication_pages_spec.rb
+subl Listing_8_05.txt
+subl Listing_8_06.txt
+bundle exec rspec spec/
+subl Listing_8_07.txt
+subl app/views/sessions/new.html.erb
+rails s
+##Listing_8.8 was just look at 
+subl Listing_8_09.txt
+subl app/controllers/sessions_controller.rb
+subl Listing_8_10.txt
+subl app/controllers/sessions_controller.rb
+rails s
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+bundle exec rspec spec/requests/authentication_pages_spec.rb -e "signin with invalid information"
+subl Listing_8_11.txt
+subl Listing_8_12.txt
+subl Listing_8_13.txt
+subl app/controllers/sessions_controller.rb
+subl Listing_8_14.txt
+subl app/controllers/application_controller.rb
+subl Listing_8_15.txt
+subl spec/models/user_spec.rb
+rails generate migration add_remember_token_to_users
+subl db/migrate/20140209025550_add_remember_token_to_users.rb
+subl Listing_8_16.txt
+bundle exec rake db:migrate
+bundle exec rake test:prepare
+#At this point the User model specs should be passing:
+bundle exec rspec spec/models/user_spec.rb
+STOP 140208
+SecureRandom
+sudo apt-get update; sudo apt-get dist-upgrade
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/ (GET like 4 errors with NoMethodError for sign_in)
+git status 
+subl Listing_8_17.txt
+subl spec/models/user_spec.rb
+subl Listing_8_18.txt
+subl app/models/user.rb
+rails console
+User.first.create_remember_token
+exit
+bundle exec rspec spec/models/user_spec.rb (PASSING)
+subl app/helpers/sessions_helper.rb
+subl Listing_8_19.txt
+bundle exec rspec spec/ (GET like 4 errors with NoMethodError for current_user)
+subl Listing_8_20.txt
+subl spec/requests/authentication_pages_spec.rb
+subl Listing_8_22.txt
+subl app/helpers/sessions_helper.rb
+bundle exec rspec spec/ (GET like 2 errors with no link or path returned for ('Sign out', href: signout_path) and ('Profile', href: user_path(user)))
+####### So fix spec/requests/authentication_pages_spec.rb
+subl Listing_8_23.txt
+subl app/helpers/sessions_helper.rb
+subl config/routes.rb
+subl Listing_8_24.txt
+bundle exec rspec spec/ (GET 4 from spec/requests/static_pages_spec.rb)
+subl spec/requests/static_pages_spec.rb
+rails s
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU 
+Exit
+####STOP 140209
+Bootstrap JavaScript library to
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl Listing_8_25.txt
+subl app/assets/javascripts/application.js
+rails s
+subl Listing_8_26.txt
+####STOP 140210
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl Listing_8_27.txt
+rails s
+subl Listing_8_28.txt
+subl spec/requests/authentication_pages_spec.rb
+subl Listing_8_29.txt
+subl app/controllers/sessions_controller.rb
+subl Listing_8_30.txt
+subl app/helpers/sessions_helper.rb
+rails s
+Rails Tutorial
+example@railstutorial.org
+rubyonrails
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU 
+User Normal
+dougedoug@mail.com
+rubyonrailsMAIL
+subl Listing_8_31.txt
+bundle install
+rails generate cucumber:install
+subl Listing_8_32.txt
+subl features/signing_in.feature
+bundle exec cucumber features/
+###Update Linux OS
+sudo apt-get update; sudo apt-get dist-upgrade
+####STOP 140211
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+bundle exec cucumber features/
+bundle exec rake cucumber
+subl Listing_8_33.txt
+subl features/step_definitions/authentication_steps.rb
+bundle exec cucumber features/
+bundle exec rake cucumber
+subl spec/support/utilities.rb
+subl spec/helpers/application_helper_spec.rb
+####STOP 140212
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+bundle exec cucumber features/
+subl Listing_8_34.txt
+#Do an update from below 8.34
+subl spec/requests/authentication_pages_spec.rb
+#####While on the branch
+git status
+git add .
+git commit -m "Covers until session 8.4"
+git checkout master
+git merge Chapter8-start
+git commit -a -m "Ready to do exercises 8.5"
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+Counting objects: 108, done.
+Compressing objects: 100% (75/75), done.
+Writing objects: 100% (80/80), 18.11 KiB, done.
+Total 80 (delta 20), reused 0 (delta 0)
+To git@github.com:douglasjmoore/sample_app.git
+   000152e..2531353  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   000152e..2531353  master -> master
+heroku run rake db:migrate
+heroku open
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+git checkout -b Chapter8-before-exercises
+bundle exec rspec spec/
+sudo apt-get update; sudo apt-get dist-upgrade
+#STOP and SAVE
+###Before Chapter 8 with a new clone21_Chapter8-before-exercises
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+###got branch Chapter8-before-exercises
+subl Exercise_8_51.txt
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+subl 140214test.txt
+####CLASS
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+subl spec/requests/user_pages_spec.rb
+rails s
+subl app/views/shared/_error_messages.html.erb
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+#There was an issue in app/views/users/new.html.erb
+      <%= render 'shared/error_messages' %>
+subl app/views/users/new.html.erb
+subl Listing_7_23.txt
+####CLASS 3/1 clone22_Chapter8-during-exercises
+subl app/models/user.rb
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+/home/dougm/rails_projects/sample_app/app/helpers/sessions_helper.rb
+####SAVE/GIT/ETC before chapter 9 or end chapter 8 
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+git add .
+### git status
+git status
+git commit -m "Chapter8-exercises Done"
+git checkout master
+git merge Chapter8-before-exercises
+git commit -a -m "Finished exercises 8.5"
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+Counting objects: 31, done.
+Compressing objects: 100% (15/15), done.
+Writing objects: 100% (17/17), 13.18 KiB, done.
+Total 17 (delta 11), reused 0 (delta 0)
+To git@github.com:douglasjmoore/sample_app.git
+   2531353..57a6e0d  master -> master
+git push heroku
+###got
+-----> Launching... done, v15
+       http://pacific-caverns-1669.herokuapp.com/ deployed to Heroku
+To git@heroku.com:pacific-caverns-1669.git
+   2531353..57a6e0d  master -> master
+ run rake db:migrate
+heroku open
+https://pacific-caverns-1669.herokuapp.com/
+####TEST sign-in/Sign-up
+User Admin
+douglas_j_moore@mail.com
+rubyonrailsHEROKU
+###DID in heroku only
+Rails User3
+test3@railstutorial.org
+rubyonrails3
+bundle exec rspec spec/
+####Start 3/8 clone23_Before-Chapter9 
+sudo aptitude update; sudo aptitude full-upgrade
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+#######UPDATE Version of VBOX to VirtualBox-4.3.8-92456-Win.exe
+## After install removed VBoxGuestAdditions.iso and added C:\Program Files\Oracle\VirtualBox\VBoxGuestAdditions.iso
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###Finished in 4.85 seconds
+###79 examples, 0 failures
+git status
+git checkout -b Chapter9-Start-updating-users
+git status
+subl Listing_9_1.txt
+#ADD TESTS for user edit page
+subl spec/requests/user_pages_spec.rb
+bundle exec rspec spec/
+###83 examples, 4 failures (The action 'edit' could not be found for UsersController)
+subl Listing_9_2.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###83 examples, 4 failures ( ActionView::MissingTemplate:)
+subl Listing_9_3.txt
+subl app/views/users/edit.html.erb
+bundle exec rspec spec/
+###83 examples, 1 failures (The action 'update' could not be found for UsersController)
+bundle exec rspec spec/requests/user_pages_spec.rb -e "edit page"
+###3 examples, 0 failures ( **PASS because "edit with invalid information not called)
+subl Listing_9_5.txt
+subl spec/requests/authentication_pages_spec.rb
+subl Listing_9_6.txt
+subl spec/support/utilities.rb
+bundle exec rspec spec/
+##STOP 140308.16:36 with ###84 examples, 2 failures 
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+subl Listing_9_7.txt
+subl app/views/layouts/_header.html.erb
+bundle exec rspec spec/
+###84 examples, 1 failures  (The action 'update' could not be found for UsersController)
+subl app/controllers/users_controller.rb
+subl app/controllers/sessions_controller.rb
+subl app/helpers/sessions_helper.rb
+subl app/controllers/application_controller.rb
+grep  -r "Welcome" .
+find . -name "*.rb" -print0 | xargs --null grep  "Welcome"
+find . -name "*.erb" -print0 | xargs --null grep  "Welcome"
+grep  -r -n "Welcome" .
+find . -name "*.txt" -print0 | xargs --null grep -n "Welcome"
+find . -name "*.rb" -print0 | xargs --null grep -n "Welcome"
+find . -name "*.erb" -print0 | xargs --null grep -n "Welcome"
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+subl Listing_9_8.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###84 examples, 0 failures But 'update' in app/controllers/users_controller.rb does nothing if sucessful)
+rails s
+User Admin
+douglas_j_moore@mail.com
+2rubyonrailsHEROKU
+######Start 140310_1
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+subl Listing_9_9.txt
+subl spec/requests/user_pages_spec.rb
+bundle exec rspec spec/ (89/5)
+subl Listing_9_10.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/ (89/1 Sign out issue)
+rails s
+User Admin
+douglas_j_moore@mail.com
+2rubyonrailsHEROKU
+rubyonrailsHEROKU
+######Start 140310_2
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+New Name
+new@example.com
+foobar
+grep  -r -n "Sign out" .
+find . -name "*.txt" -print0 | xargs --null grep -n "Sign out"
+find . -name "*.rb" -print0 | xargs --null grep -n "Sign out"
+find . -name "*.erb" -print0 | xargs --null grep -n "Sign out"
+subl Listing_9_11.txt
+subl spec/requests/authentication_pages_spec.rb
+subl Listing_9_12.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###10 errors after this
+######Start 140311_1
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###10 errors after this (subl Listing_9_12.txt)
+git status
+subl Listing_9_13.txt
+subl spec/requests/authentication_pages_spec.rb
+bundle exec rspec spec/ 
+(95 examples, 13 failures)
+subl Listing_9_14.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/ 
+(95 examples, 13 failures)
+subl Listing_9_15.txt
+subl app/helpers/sessions_helper.rb
+bundle exec rspec spec/ 
+###(95 examples, 69 failures)
+bundle exec rake db:migrate
+bundle exec rake test:prepare
+sudo aptitude update; sudo aptitude full-upgrade
+#####Went back to listing 8.30 for current_user
+bundle exec rspec spec/ 
+###(95 examples, 13 failures)
+grep  -r -n "Save changes" .
+find . -name "*.txt" -print0 | xargs --null grep -n "Save changes"
+find . -name "*.rb" -print0 | xargs --null grep -n "Save changes"
+find . -name "*.erb" -print0 | xargs --null grep -n "Save changes"
+find . -name "*.scss" -print0 | xargs --null grep -n "list"
+grep  -r -n "Update your profile" .
+subl Listing_9_16.txt
+subl spec/requests/authentication_pages_spec.rb
+bundle exec rspec spec/ 
+###(96 examples, 14 failures)
+railss
+New Name
+new@example.com
+foobar
+subl Listing_9_17.txt
+subl app/helpers/sessions_helper.rb
+bundle exec rspec spec/ 
+###(96 examples, 14 failures)
+subl Listing_9_18.txt
+subl app/controllers/users_controller.rb 
+bundle exec rspec spec/ 
+###(96 examples, 14 failures)
+subl app/views/shared/_error_messages.html.erb
+######Start 140312_1
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###(96 examples, 14 failures)
+git status
+subl Listing_9_19.txt
+subl app/controllers/sessions_controller.rb
+bundle exec rspec spec/
+###(96 examples, 13 failures)
+subl Listing_9_20.txt
+subl spec/requests/authentication_pages_spec.rb
+bundle exec rspec spec/
+###(97 examples, 14 failures)
+subl Listing_9_21.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###(97 examples, 13 failures)
+subl Listing_9_22.txt
+subl spec/requests/user_pages_spec.rb
+bundle exec rspec spec/
+###(100 examples, 16 failures)
+subl Listing_9_23.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###(100 examples, 16 failures)
+subl Listing_9_24.txt
+subl app/views/users/index.html.erb
+bundle exec rspec spec/
+###(100 examples, 13 failures)
+subl Listing_9_25.txt
+subl app/assets/stylesheets/custom.css.scss
+subl Listing_9_26.txt
+subl spec/requests/authentication_pages_spec.rb
+bundle exec rspec spec/
+###(101 examples, 14 failures)
+subl Listing_9_27.txt
+subl app/views/layouts/_header.html.erb
+bundle exec rspec spec/
+###(101 examples, 13 failures)
+rails s
+New Name
+new@example.com
+foobar
+subl Listing_9_28.txt
+subl Gemfile
+###Since rails updated from4.0.2 to 4.0.3 did
+bundle update rails
+bundle exec rspec spec/
+###(101 examples, 13 failures)
+subl Listing_9_29.txt
+subl lib/tasks/sample_data.rake
+###RUN
+bundle exec rake db:reset
+bundle exec rake db:populate
+bundle exec rake test:prepare
+rails s
+example-1@railstutorial.org
+password
+subl Listing_9_30.txt
+subl Gemfile
+###Since already there did nothing.
+bundle install
+bundle show will_paginate
+subl Listing_9_31.txt
+subl spec/factories.rb
+subl Listing_9_32.txt
+subl spec/requests/user_pages_spec.rb
+bundle exec rspec spec/
+###(102 examples, 14 failures)(should have_selector('div.pagination'))
+subl Listing_9_33.txt
+subl app/views/users/index.html.erb
+rails console
+User.paginate(page: 1)
+User.paginate(page: 2)
+bundle exec rspec spec/
+###(102 examples, 17 failures)(undefined method `total_pages')
+subl Listing_9_34.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###(102 examples, 13 failures)()
+subl Listing_9_35.txt
+subl app/views/users/index.html.erb
+bundle exec rspec spec/
+###(102 examples, 17 failures)(Failure/Error: visit users_path)
+subl Listing_9_36.txt
+subl app/views/users/_user.html.erb
+######Start 140313_1
+sudo aptitude update; sudo aptitude full-upgrade
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###(102 examples, 13 failures)
+git status
+subl Listing_9_37.txt
+subl app/views/users/index.html.erb
+bundle exec rspec spec/
+###(102 examples, 13 failures)
+example-5@railstutorial.org
+password
+subl Listing_9_38.txt
+subl spec/models/user_spec.rb
+bundle exec rspec spec/
+###(105 examples, 16 failures) (Also need to migrate and prepare)
+rails generate migration add_admin_to_users admin:boolean
+####GOT
+      invoke  active_record
+      create    db/migrate/20140313150301_add_admin_to_users.rb
+subl db/migrate/20140313150301_add_admin_to_users.rb
+subl Listing_9_39.txt (Set admin to false as default)
+bundle exec rake db:migrate
+bundle exec rake test:prepare
+bundle exec rspec spec/
+###(105 examples, 13 failures)
+rails console --sandbox
+user = User.first
+user.admin?
+user.toggle!(:admin)
+user.admin?
+bundle exec rspec spec/models/user_spec.rb
+###(26 examples, 0 failures)
+bundle exec rspec spec/
+###(105 examples, 13 failures)
+subl Listing_9_40.txt
+subl lib/tasks/sample_data.rake
+###RUN
+bundle exec rake db:reset
+bundle exec rake db:populate
+bundle exec rake test:prepare
+bundle exec rspec spec/
+###(105 examples, 13 failures)
+subl Listing_9_41.txt
+subl spec/factories.rb
+bundle exec rspec spec/
+###(105 examples, 13 failures)
+subl Listing_9_42.txt
+subl spec/requests/user_pages_spec.rb
+bundle exec rspec spec/
+###(109 examples, 15 failures)
+subl Listing_9_43.txt
+subl app/views/users/_user.html.erb
+bundle exec rspec spec/
+###(109 examples, 16 failures)
+#### Changed current_user? to current_user= (It seem to help alittle)
+bundle exec rspec spec/
+###(109 examples, 15 failures)
+subl Listing_9_44.txt
+subl app/controllers/users_controller.rb
+subl Listing_9_45.txt
+subl spec/requests/authentication_pages_spec.rb
+bundle exec rspec spec/
+###(110 examples, 16 failures)
+subl Listing_9_46.txt
+subl app/controllers/users_controller.rb
+bundle exec rspec spec/
+###(111 examples, 16 failures) Looked on internet and added help - test passed no change really
+rails s
+example@railstutorial.org
+foobar
+####Redo Change from 'encrypt' to 'hash' 
+subl app/models/user.rb
+subl app/helpers/sessions_helper.rb
+###RUN
+bundle exec rake db:reset
+bundle exec rake db:populate
+bundle exec rake test:prepare
+rails s
+example-1@railstutorial.org
+password
+example@railstutorial.org
+foobar
+git status
+git add .
+git commit -m "Chapter9-Start-updating-users Done Finish user edit, update, index, and destroy actions"
+git checkout master
+git merge Chapter9-Start-updating-users
+git commit -a -m "Chapter9-Start-updating-users"
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+FAILED
+ssh: Could not resolve hostname github.com: Name or service not known
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+git status
+git push
+###got
+Counting objects: 124, done.
+Compressing objects: 100% (87/87), done.
+Writing objects: 100% (90/90), 47.63 KiB, done.
+Total 90 (delta 58), reused 0 (delta 0)
+To git@github.com:douglasjmoore/sample_app.git
+   57a6e0d..88b50bc  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   57a6e0d..88b50bc  master -> master
+heroku pg:reset DATABASE
+####GOT
+ !    WARNING: Destructive Action
+ !    This command will affect the app: pacific-caverns-1669
+ !    To proceed, type "pacific-caverns-1669" or re-run this command with --confirm pacific-caverns-1669
+heroku pg:reset DATABASE --confirm pacific-caverns-1669
+heroku run rake db:migrate
+heroku run rake db:populate
+heroku restart
+heroku open
+#####Done 3/13 clone24_Chapter9_Before_exercises
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+sudo aptitude update; sudo aptitude full-upgrade
+git status
+git checkout -b Chapter9_6-Exercises
+subl Listing_9_47.txt
+diff Listing_9_47.txt 'Listing 9.47'
+####Same but
+	gem 'rails', '4.0.3'
+	do we need 
+		# The following optional lines are part of the advanced setup.
+rails s
+example-1@railstutorial.org
+password
+example@railstutorial.org
+foobar
+subl Listing_9_48.txt
+subl spec/requests/user_pages_spec.rb
+subl app/controllers/users_controller.rb
+subl app/views/users/edit.html.erb
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+EX-3
+subl spec/requests/authentication_pages_spec.rb
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###(120 examples, 0 failures)
+EX-4
+subl spec/support/utilities.rb
+bundle exec rspec spec/
+###(120 examples, 0 failures)
+subl Listing_9_49.txt
+subl app/views/users/_fields.html.erb
+subl Listing_9_50.txt
+subl app/views/users/new.html.erb
+subl app/views/users/edit.html.erb
+####Class
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+###(122 examples, 0 failures)
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl Listing_9_51.txt
+subl spec/requests/authentication_pages_spec.rb
+git status
+git add .
+git commit -m "Chapter9_6-Exercises Done"
+git checkout master
+git merge Chapter9_6-Exercises
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+Counting objects: 47, done.
+Compressing objects: 100% (26/26), done.
+Writing objects: 100% (27/27), 4.77 KiB, done.
+Total 27 (delta 17), reused 0 (delta 0)
+To git@github.com:douglasjmoore/sample_app.git
+   88b50bc..b588a6f  master -> master
+git push heroku
+###got
+To git@heroku.com:pacific-caverns-1669.git
+   88b50bc..b588a6f  master -> master
+heroku run rake db:migrate
+heroku open
+git checkout -b Chap-10-user-microposts
+#####END 140325_1
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+rails generate model Micropost content:string user_id:integer
+###I did not see the file spec/factories/microposts.rb
+rm -f spec/factories/microposts.rb
+subl Listing_10_1.txt
+subl db/migrate/20140326011804_create_microposts.rb
+subl Listing_10_2.txt
+subl spec/models/micropost_spec.rb
+bundle exec rake db:migrate
+bundle exec rake test:prepare
+bundle exec rspec spec/models/micropost_spec.rb
+bundle exec rspec spec/
+125 examples, 0 failures
+sudo aptitude update; sudo aptitude full-upgrade
+#####END 140325_2
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+125 examples, 0 failures
+subl Listing_10_3.txt
+subl spec/models/micropost_spec.rb
+bundle exec rspec spec/models/micropost_spec.rb
+bundle exec rspec spec/
+subl Listing_10_4.txt
+subl app/models/micropost.rb
+#####END 140326_1
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl Listing_10_5.txt
+subl app/models/micropost.rb
+subl Listing_10_6.txt
+subl spec/models/user_spec.rb
+130/7
+subl Listing_10_7.txt
+subl app/models/micropost.rb
+subl Listing_10_8.txt
+subl app/models/user.rb
+130/0
+bundle exec rspec spec/models
+33/0
+subl Listing_10_9.txt
+subl spec/factories.rb
+130/7
+subl Listing_10_10.txt
+subl spec/models/user_spec.rb
+subl Listing_10_11.txt
+subl app/models/micropost.rb
+131/0
+rails console --sandbox
+-> { puts "foo" }
+-> { puts "foo" }.call
+subl Listing_10_12.txt
+subl spec/models/user_spec.rb
+132/1
+subl Listing_10_13.txt
+subl app/models/user.rb
+132/0
+subl Listing_10_14.txt
+subl spec/models/micropost_spec.rb
+134/2
+subl Listing_10_15.txt
+subl app/models/micropost.rb
+134/0
+subl Listing_10_16.txt
+subl spec/requests/user_pages_spec.rb
+137/3
+subl Listing_10_17.txt
+subl app/views/users/show.html.erb
+137/5
+subl Listing_10_18.txt
+#Had to create folder microposts
+subl app/views/microposts/_micropost.html.erb
+137/5
+subl Listing_10_19.txt
+subl app/controllers/users_controller.rb
+137/0
+subl Listing_10_20.txt
+subl lib/tasks/sample_data.rake
+bundle exec rake db:reset
+bundle exec rake db:populate
+bundle exec rake test:prepare
+subl Listing_10_21.txt
+subl app/assets/stylesheets/custom.css.scss
+137/0
+subl Listing_10_22.txt
+subl config/routes.rb
+subl Listing_10_23.txt
+subl spec/requests/authentication_pages_spec.rb
+139/2
+subl Listing_10_24.txt
+subl app/helpers/sessions_helper.rb
+139/2
+subl Listing_10_25.txt
+subl app/controllers/microposts_controller.rb
+139/0
+bundle exec rspec spec/requests/authentication_pages_spec.rb
+33/0
+###As with the Users resource, we’ll use an integration test:
+rails generate integration_test micropost_pages
+ invoke  rspec
+      create    spec/requests/micropost_pages_spec.rb
+subl Listing_10_26.txt
+subl spec/requests/micropost_pages_spec.rb
+142/3
+subl Listing_10_27.txt
+subl app/controllers/microposts_controller.rb
+142/3 (no change)
+subl Listing_10_28.txt
+subl app/views/static_pages/home.html.erb
+142/3 (Diff)
+subl Listing_10_29.txt
+subl app/views/shared/_user_info.html.erb
+142/3 (Diff)
+subl Listing_10_30.txt
+subl app/views/shared/_micropost_form.html.erb
+142/3 (Diff)
+subl Listing_10_31.txt
+subl app/controllers/static_pages_controller.rb
+142/3 (Diff)
+subl Listing_10_32.txt
+subl app/views/shared/_error_messages.html.erb
+142/31 because need object for USER and ERRORS
+subl Listing_10_33.txt
+subl app/views/users/new.html.erb
+### Because of two below fixed in app/views/users/_fields.html.erb
+subl Listing_9_49.txt
+subl Listing_9_50.txt
+subl app/views/users/_fields.html.erb
+subl Listing_10_34.txt
+subl app/views/users/edit.html.erb
+142/0
+subl Listing_10_35.txt
+subl spec/models/user_spec.rb
+146/4
+subl Listing_10_36.txt
+subl app/models/user.rb
+146/0
+subl Listing_10_37.txt
+subl spec/requests/static_pages_spec.rb
+147/1
+subl Listing_10_38.txt
+subl app/controllers/static_pages_controller.rb
+147/1
+subl Listing_10_39.txt
+subl app/views/shared/_feed.html.erb
+147/1 (Same)
+subl Listing_10_40.txt
+subl app/views/shared/_feed_item.html.erb
+147/1 (Same)
+subl Listing_10_41.txt
+subl app/views/static_pages/home.html.erb
+147/2
+subl Listing_10_42.txt
+subl app/controllers/microposts_controller.rb
+147/0
+#####END 140326_2
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+subl Listing_10_43.txt
+subl app/views/microposts/_micropost.html.erb
+147/0
+subl Listing_10_44.txt
+subl app/views/shared/_feed_item.html.erb
+147/0
+subl Listing_10_45.txt
+subl spec/requests/micropost_pages_spec.rb
+148/1
+subl Listing_10_46.txt
+subl app/controllers/microposts_controller.rb
+148/0
+git status
+git add .
+git commit -m "Chap-10-user-microposts Done"
+git checkout master
+git merge Chap-10-user-microposts
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+Counting objects: 129, done.
+Compressing objects: 100% (96/96), done.
+Writing objects: 100% (97/97), 30.51 KiB, done.
+Total 97 (delta 38), reused 0 (delta 0)
+To git@github.com:douglasjmoore/sample_app.git
+   b588a6f..21b90a8  master -> master
+git push heroku
+###got
+-----> Launching... done, v18
+       http://pacific-caverns-1669.herokuapp.com/ deployed to Heroku
+
+To git@heroku.com:pacific-caverns-1669.git
+   b588a6f..21b90a8  master -> master
+
+heroku pg:reset DATABASE
+heroku pg:reset DATABASE --confirm pacific-caverns-1669
+###got
+ !    WARNING: Destructive Action
+ !    This command will affect the app: pacific-caverns-1669
+ !    To proceed, type "pacific-caverns-1669" or re-run this command with --confirm pacific-caverns-1669
+
+> ^C !    Command cancelled.
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ heroku pg:reset DATABASE --confirm pacific-caverns-1669
+Resetting HEROKU_POSTGRESQL_MAROON_URL (DATABASE_URL)... done
+
+heroku run rake db:migrate
+###got
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ heroku run rake db:migrate
+Running `rake db:migrate` attached to terminal... up, run.2701
+Migrating to CreateUsers (20140117155224)
+==  CreateUsers: migrating ====================================================
+-- create_table(:users)
+   -> 0.0527s
+==  CreateUsers: migrated (0.0530s) ===========================================
+
+Migrating to AddIndexToUsersEmail (20140118130737)
+==  AddIndexToUsersEmail: migrating ===========================================
+-- add_index(:users, :email, {:unique=>true})
+   -> 0.0062s
+==  AddIndexToUsersEmail: migrated (0.0063s) ==================================
+
+Migrating to AddPasswordDigestToUsers (20140121001309)
+==  AddPasswordDigestToUsers: migrating =======================================
+-- add_column(:users, :password_digest, :string)
+   -> 0.0017s
+==  AddPasswordDigestToUsers: migrated (0.0018s) ==============================
+
+Migrating to AddRememberTokenToUsers (20140209025550)
+==  AddRememberTokenToUsers: migrating ========================================
+-- add_column(:users, :remember_token, :string)
+   -> 0.0014s
+-- add_index(:users, :remember_token)
+   -> 0.0080s
+==  AddRememberTokenToUsers: migrated (0.0096s) ===============================
+
+Migrating to AddAdminToUsers (20140313150301)
+==  AddAdminToUsers: migrating ================================================
+-- add_column(:users, :admin, :boolean, {:default=>false})
+   -> 0.0233s
+==  AddAdminToUsers: migrated (0.0235s) =======================================
+
+Migrating to CreateMicroposts (20140326011804)
+==  CreateMicroposts: migrating ===============================================
+-- create_table(:microposts)
+   -> 0.0090s
+-- add_index(:microposts, [:user_id, :created_at])
+   -> 0.0066s
+==  CreateMicroposts: migrated (0.0158s) ======================================
+
+heroku run rake db:populate
+#dougm@dougm-VirtualBox:~/rails_projects/sample_app$ heroku run rake db:populate
+Running `rake db:populate` attached to terminal... up, run.2214
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ 
+########### DO CHAPTER 11 without exercises
+git checkout -b Chap-10-w-out-Exercises-Chap11-following-users
+subl Listing_10_47.txt
+subl app/helpers/microposts_helper.rb
+148/0
+### Create Model
+rails generate model Relationship follower_id:integer followed_id:integer
+#### GOT
+      invoke  active_record
+      create    db/migrate/20140327145115_create_relationships.rb
+      create    app/models/relationship.rb
+      invoke    rspec
+      create      spec/models/relationship_spec.rb
+
+###Remove Relationship factory if created (Was Not)
+rm -f spec/factories/relationship.rb
+ls spec/factories/relationship.rb
+ls app/models/relationship.rb
+subl Listing_11_1.txt
+subl db/migrate/20140327145115_create_relationships.rb
+bundle exec rake db:migrate
+###GOT
+==  CreateRelationships: migrating ============================================
+-- create_table(:relationships)
+   -> 0.0168s
+-- add_index(:relationships, :follower_id)
+   -> 0.0161s
+-- add_index(:relationships, :followed_id)
+   -> 0.0001s
+-- add_index(:relationships, [:follower_id, :followed_id], {:unique=>true})
+   -> 0.0005s
+==  CreateRelationships: migrated (0.0349s) ===================================
+
+bundle exec rake test:prepare
+subl Listing_11_2.txt
+subl spec/models/relationship_spec.rb
+149/1 (method `relationships')
+subl Listing_11_3.txt
+subl spec/models/user_spec.rb
+150/2 (method `relationships')
+subl Listing_11_4.txt
+subl app/models/user.rb
+150/0
+subl Listing_11_5.txt
+subl spec/models/relationship_spec.rb
+154/4 (undefined method `followed' and `follower')
+subl Listing_11_6.txt
+subl app/models/relationship.rb
+154/0
+subl Listing_11_7.txt
+subl spec/models/relationship_spec.rb
+156/2
+subl Listing_11_8.txt
+subl app/models/relationship.rb
+156/0
+subl Listing_11_9.txt
+subl spec/models/user_spec.rb
+157/1
+subl Listing_11_10.txt
+subl app/models/user.rb
+157/0
+subl Listing_11_11.txt
+subl spec/models/user_spec.rb
+161/4
+subl Listing_11_12.txt
+subl app/models/user.rb
+161/0
+subl Listing_11_13.txt
+subl spec/models/user_spec.rb
+164/3
+subl Listing_11_14.txt
+subl app/models/user.rb
+164/0
+subl Listing_11_15.txt
+subl spec/models/user_spec.rb
+167/3
+subl Listing_11_16.txt
+subl app/models/user.rb
+167/0
+subl Listing_11_17.txt
+subl lib/tasks/sample_data.rake
+bundle exec rake db:reset
+-- create_table("microposts", {:force=>true})
+   -> 0.0313s
+-- add_index("microposts", ["user_id", "created_at"], {:name=>"index_microposts_on_user_id_and_created_at"})
+   -> 0.0087s
+-- create_table("relationships", {:force=>true})
+   -> 0.0066s
+-- add_index("relationships", ["followed_id"], {:name=>"index_relationships_on_followed_id"})
+   -> 0.0053s
+-- add_index("relationships", ["follower_id", "followed_id"], {:name=>"index_relationships_on_follower_id_and_followed_id", :unique=>true})
+   -> 0.0050s
+-- add_index("relationships", ["follower_id"], {:name=>"index_relationships_on_follower_id"})
+   -> 0.0087s
+-- create_table("users", {:force=>true})
+   -> 0.0138s
+-- add_index("users", ["email"], {:name=>"index_users_on_email", :unique=>true})
+   -> 0.0086s
+-- add_index("users", ["remember_token"], {:name=>"index_users_on_remember_token"})
+   -> 0.0155s
+-- initialize_schema_migrations_table()
+   -> 0.0121s
+
+bundle exec rake db:populate
+NOTHING
+bundle exec rake test:prepare
+NOTHING
+subl Listing_11_18.txt
+subl config/routes.rb
+167/0
+subl Listing_11_19.txt
+subl spec/requests/static_pages_spec.rb
+169/2
+subl Listing_11_20.txt
+subl app/views/shared/_stats.html.erb
+169/2
+subl Listing_11_21.txt
+subl app/views/static_pages/home.html.erb
+169/0
+subl Listing_11_22.txt
+subl app/assets/stylesheets/custom.css.scss
+subl Listing_11_23.txt
+subl app/views/users/_follow_form.html.erb
+subl Listing_11_24.txt
+subl config/routes.rb
+169/0
+subl Listing_11_25.txt
+subl app/views/users/_follow.html.erb
+169/0
+subl Listing_11_26.txt
+subl app/views/users/_unfollow.html.erb
+169/0
+subl Listing_11_27.txt
+subl app/views/users/show.html.erb
+169/0
+subl Listing_11_28.txt
+subl spec/requests/authentication_pages_spec.rb
+171/2
+subl Listing_11_29.txt
+subl spec/requests/user_pages_spec.rb
+177/8
+subl Listing_11_30.txt
+subl app/controllers/users_controller.rb
+177/6
+subl Listing_11_31.txt
+subl app/views/users/show_follow.html.erb
+177/0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+subl Listing_11_32.txt
+subl Listing_11_33.txt
+subl Listing_11_34.txt
+subl Listing_11_35.txt
+subl Listing_11_36.txt
+subl Listing_11_37.txt
+subl Listing_11_38.txt
+subl Listing_11_39.txt
+subl Listing_11_40.txt
+subl Listing_11_41.txt
+subl Listing_11_42.txt
+subl Listing_11_43.txt
+subl Listing_11_44.txt
+subl Listing_11_45.txt
+subl Listing_11_46.txt
+subl Listing_11_47.txt
+subl Listing_11_48.txt
+subl Listing_11_49.txt
+
+
+
+
+
+FIND
+The last piece of functionality 
+
+######
+
+
+
+####
+
+
+
+subl app/views/users/new.html.erb
+
+
+
+
+
+
+
+grep  -r -n "correct_user" .
+grep  -r -n "current_user" .
+grep  -r -n "SessionsHelper" .
+
+grep  -r -n "sign_in" .
+grep  -r -n "valid_signup" .
+grep  -r -n "current_user=" .
+grep  -r -n "no_capybara" .
+grep  -r -n "valid_signin" .
+grep  -r -n "describe \"edit\" do" .
+grep  -r -n "edit_user_path" .
+grep  -r -n "with valid information" .
+find . -name "*.rb" -print0 | xargs --null grep -n "with valid information"
+grep  -r -n "total_pages" .
+grep  -r -n "visit users_path" .
+grep  -r -n "visit" .
+grep  -r -n "render" .
+find . -name "*.rb" -print0 | xargs --null grep -n "render"
+grep  -r -n "after saving the user" .
+grep  -r -n "followed by signout" .
+grep  -r -n "valid_signup" .
+grep  -r -n "encrypt" .
+grep  -r -n "user_params" .
+grep  -r -n "Please sign in" .
+find . -name "*.rb" -print0 | xargs --null grep -n "signed_in_user"
+grep  -r -n "f.label :password_confirmation," .
+grep  -r -n "Confirmation" .
+grep  -r -n "current_user" .
+grep  -r -n "signed_in_user" .
+find . -name "*.rb" -print0 | xargs --null grep -n "signed_in_user"
+grep  -r -n "request" .
+find . -name "*.rb" -print0 | xargs --null grep -n "request"
+find . -name "*.rb" -print0 | xargs --null grep -n "current_user="
+grep  -r -n "current_user=" .
+grep  -r -n "@micropost" .
+grep  -r -n "form_for" .
+
+Change from 'encrypt' to 'hash' 
+
+current_user=
+request
+signed_in_user
+Please sign in
+user_params
+valid_signup
+after saving the user
+followed by signout
+f.label :password_confirmation,
+sign_in
+Confirmation
+Confirm Password
+
+
+subl Listing_11_x.txt
+subl Listing_11_x.txt
+
+
+
+
+
+subl app/controllers/sessions_controller.rb
+
+
+
+
+
+
+
+### CLOSED 140308
+subl app/helpers/sessions_helper.rb
+subl app/views/users/new.html.erb
+subl spec/requests/authentication_pages_spec.rb
+subl app/controllers/application_controller.rb
+subl app/controllers/sessions_controller.rb
+subl spec/support/utilities.rb
+subl spec/helpers/application_helper_spec.rb
+subl features/step_definitions/authentication_steps.rb
+subl features/signing_in.feature
+subl app/assets/javascripts/application.js
+subl app/controllers/users_controller.rb
+subl 
+
+
+
+
+
+
+
+User Add85
+doug@ami.com
+qwerASDF
+
+
+
+
+
+
+rails s
+subl Listing_11_x.txt
+
+
+
+
+
+
+
+
+
+bundle exec rspec spec/
+
+
+
+
+
+
+
+
+
+
+
+
+### Production work
+https://pacific-caverns-1669.herokuapp.com/
+
+
+
+
+###Update Linux OS
+####sudo apt-get update; sudo apt-get dist-upgrade
+
+###Update Linux OS NEW-better
+
+sudo apt-get update; sudo apt-get install aptitude
+sudo aptitude update; sudo aptitude full-upgrade
+
+
+#####While on the branch
+git status
+git add .
+git commit -m "Chap-10-w-out-Exercises-Chap11-following-users Done"
+git checkout master
+git merge Chap-10-w-out-Exercises-Chap11-following-users
+# Push up to GitHub: and deploy to Heroku:
+git push
+###got
+
+git push heroku
+###got
+
+heroku run rake db:migrate
+heroku open
+
+#####OR for heroku 
+git push heroku
+###got
+
+heroku pg:reset DATABASE --confirm pacific-caverns-1669
+###got
+ !    WARNING: Destructive Action
+ !    This command will affect the app: pacific-caverns-1669
+ !    To proceed, type "pacific-caverns-1669" or re-run this command with --confirm pacific-caverns-1669
+
+> ^C !    Command cancelled.
+dougm@dougm-VirtualBox:~/rails_projects/sample_app$ 
+heroku run rake db:migrate
+###got
+
+heroku run rake db:populate
+###got
+
+heroku open
+
+
+
+
+
+
+
+#####To create the branch
+git checkout -b chap-5 exercises
+git checkout -b modeling-users-chap-6
+git checkout -b sign-up-chap-7
+git checkout -b sign-up-before-chap-7_6
+git checkout -b Chapter8-start
+git checkout -b Chapter9-Start-updating-users
+git checkout -b Chapter9_6-Exercises
+git checkout -b Chap-10-user-microposts
+git checkout -b Chap-10-w-out-Exercises-Chap11-following-users
+git status
+
+
+
+GENERAL PUSH TO git and heroku
+git push
+git push heroku
+heroku run rake db:migrate
+git remote set-url origin git@github.com:douglasjmoore/sample_app.git
+
+
+######CONSOLE
+rails console
+rails console --sandbox
+Exit with CTRL-D
+
+
+http://www.trolltech.com #### not there
+
+
+
+Ranges also work with characters
+
+
+
+
+
+Remember to start with
+cd ~/rails_projects/sample_app
+rails c
+
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/
+
+
+http://localhost:3000
+http://localhost:3000/users?page=3
+
+sudo apt-get update; sudo apt-get dist-upgrade
+
+
+
+
+
+
+cd ~/rails_projects/sample_app
+bundle exec rspec spec/

@@ -1,0 +1,26 @@
+
+Listing 11.21. Adding follower stats to the Home page.
+subl app/views/static_pages/home.html.erb
+
+<% if signed_in? %>
+      .
+      .
+      .
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/stats' %>
+      </section>
+      <section>
+        <%= render 'shared/micropost_form' %>
+      </section>
+      .
+      .
+      .
+<% else %>
+  .
+  .
+  .
+<% end %>
+

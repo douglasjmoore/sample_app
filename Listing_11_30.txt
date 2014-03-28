@@ -1,0 +1,96 @@
+
+Listing 11.30. The following and followers actions.
+subl app/controllers/users_controller.rb
+
+class UsersController < ApplicationController
+  before_action :signed_in_user,
+                only: [:index, :edit, :update, :destroy, :following, :followers]
+  .
+  .
+  .
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.followed_users.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  private
+  .
+  .
+  .
+end
+
+
+
+
+
+Failures:
+
+  1) User pages following/followers followed users 
+     Failure/Error: visit following_user_path(user)
+     ActionView::MissingTemplate:
+       Missing template users/show_follow, application/show_follow with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/controllers/users_controller.rb:57:in `following'
+     # ./spec/requests/user_pages_spec.rb:192:in `block (4 levels) in <top (required)>'
+
+  2) User pages following/followers followed users 
+     Failure/Error: visit following_user_path(user)
+     ActionView::MissingTemplate:
+       Missing template users/show_follow, application/show_follow with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/controllers/users_controller.rb:57:in `following'
+     # ./spec/requests/user_pages_spec.rb:192:in `block (4 levels) in <top (required)>'
+
+  3) User pages following/followers followed users 
+     Failure/Error: visit following_user_path(user)
+     ActionView::MissingTemplate:
+       Missing template users/show_follow, application/show_follow with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/controllers/users_controller.rb:57:in `following'
+     # ./spec/requests/user_pages_spec.rb:192:in `block (4 levels) in <top (required)>'
+
+  4) User pages following/followers followers 
+     Failure/Error: visit followers_user_path(other_user)
+     ActionView::MissingTemplate:
+       Missing template users/show_follow, application/show_follow with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/controllers/users_controller.rb:64:in `followers'
+     # ./spec/requests/user_pages_spec.rb:203:in `block (4 levels) in <top (required)>'
+
+  5) User pages following/followers followers 
+     Failure/Error: visit followers_user_path(other_user)
+     ActionView::MissingTemplate:
+       Missing template users/show_follow, application/show_follow with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/controllers/users_controller.rb:64:in `followers'
+     # ./spec/requests/user_pages_spec.rb:203:in `block (4 levels) in <top (required)>'
+
+  6) User pages following/followers followers 
+     Failure/Error: visit followers_user_path(other_user)
+     ActionView::MissingTemplate:
+       Missing template users/show_follow, application/show_follow with {:locale=>[:en], :formats=>[:html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "/home/dougm/rails_projects/sample_app/app/views"
+     # ./app/controllers/users_controller.rb:64:in `followers'
+     # ./spec/requests/user_pages_spec.rb:203:in `block (4 levels) in <top (required)>'
+
+Finished in 7.77 seconds
+177 examples, 6 failures
+
+Failed examples:
+
+rspec ./spec/requests/user_pages_spec.rb:195 # User pages following/followers followed users 
+rspec ./spec/requests/user_pages_spec.rb:196 # User pages following/followers followed users 
+rspec ./spec/requests/user_pages_spec.rb:197 # User pages following/followers followed users 
+rspec ./spec/requests/user_pages_spec.rb:206 # User pages following/followers followers 
+rspec ./spec/requests/user_pages_spec.rb:207 # User pages following/followers followers 
+rspec ./spec/requests/user_pages_spec.rb:208 # User pages following/followers followers 
+

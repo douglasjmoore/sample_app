@@ -1,0 +1,12 @@
+
+Listing 11.4. Implementing the user/relationships has_many association.
+subl app/models/user.rb
+
+class User < ActiveRecord::Base
+  has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  .
+  .
+  .
+end
+

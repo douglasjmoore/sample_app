@@ -1,0 +1,7 @@
+
+Listing 11.40. The Ruby JavaScript (RJS) to destroy a following relationship.
+subl app/views/relationships/destroy.js.erb
+
+$("#follow_form").html("<%= escape_javascript(render('users/follow')) %>")
+$("#followers").html('<%= @user.followers.count %>')
+

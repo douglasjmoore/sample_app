@@ -1,0 +1,13 @@
+
+Listing 11.6. Adding the belongs_to associations to the Relationship model.
+subl app/models/relationship.rb
+
+class Relationship < ActiveRecord::Base
+  belongs_to :follower, class_name: "User"
+  belongs_to :followed, class_name: "User"
+end
+
+###OLD
+
+class Relationship < ActiveRecord::Base
+end

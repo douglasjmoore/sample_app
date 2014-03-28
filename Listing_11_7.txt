@@ -1,0 +1,45 @@
+
+Listing 11.7. Testing the Relationship model validations.
+subl spec/models/relationship_spec.rb
+
+describe Relationship do
+  .
+  .
+  .
+  describe "when followed id is not present" do
+    before { relationship.followed_id = nil }
+    it { should_not be_valid }
+  end
+
+  describe "when follower id is not present" do
+    before { relationship.follower_id = nil }
+    it { should_not be_valid }
+  end
+end
+
+
+
+
+
+Failures:
+
+  1) Relationship when followed id is not present 
+     Failure/Error: it { should_not be_valid }
+       expected #<Relationship id: nil, follower_id: 181, followed_id: nil, created_at: nil, updated_at: nil> not to be valid
+     # ./spec/models/relationship_spec.rb:23:in `block (3 levels) in <top (required)>'
+
+  2) Relationship when follower id is not present 
+     Failure/Error: it { should_not be_valid }
+       expected #<Relationship id: nil, follower_id: nil, followed_id: 182, created_at: nil, updated_at: nil> not to be valid
+     # ./spec/models/relationship_spec.rb:28:in `block (3 levels) in <top (required)>'
+
+Finished in 7.14 seconds
+156 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/models/relationship_spec.rb:23 # Relationship when followed id is not present 
+rspec ./spec/models/relationship_spec.rb:28 # Relationship when follower id is not present 
+
+
+

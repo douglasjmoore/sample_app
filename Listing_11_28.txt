@@ -1,0 +1,64 @@
+
+Listing 11.28. Tests for the authorization of the following and followers pages.
+subl spec/requests/authentication_pages_spec.rb
+
+require 'spec_helper'
+
+describe "Authentication" do
+  .
+  .
+  .
+  describe "authorization" do
+
+    describe "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "in the Users controller" do
+        .
+        .
+        .
+        describe "visiting the following page" do
+          before { visit following_user_path(user) }
+          it { should have_title('Sign in') }
+        end
+
+        describe "visiting the followers page" do
+          before { visit followers_user_path(user) }
+          it { should have_title('Sign in') }
+        end
+      end
+      .
+      .
+      .
+    end
+    .
+    .
+    .
+  end
+  .
+  .
+  .
+end
+
+Failures:
+
+  1) Authentication authorization for non-signed-in users in the Users controller visiting the followers page 
+     Failure/Error: before { visit followers_user_path(user) }
+     AbstractController::ActionNotFound:
+       The action 'followers' could not be found for UsersController
+     # ./spec/requests/authentication_pages_spec.rb:121:in `block (6 levels) in <top (required)>'
+
+  2) Authentication authorization for non-signed-in users in the Users controller visiting the following page 
+     Failure/Error: before { visit following_user_path(user) }
+     AbstractController::ActionNotFound:
+       The action 'following' could not be found for UsersController
+     # ./spec/requests/authentication_pages_spec.rb:116:in `block (6 levels) in <top (required)>'
+
+Finished in 7.27 seconds
+171 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/requests/authentication_pages_spec.rb:122 # Authentication authorization for non-signed-in users in the Users controller visiting the followers page 
+rspec ./spec/requests/authentication_pages_spec.rb:117 # Authentication authorization for non-signed-in users in the Users controller visiting the following page 
+

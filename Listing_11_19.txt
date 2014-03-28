@@ -1,0 +1,91 @@
+
+Listing 11.19. Testing the following/follower statistics on the Home page.
+subl spec/requests/static_pages_spec.rb
+
+require 'spec_helper'
+
+describe "Static pages" do
+  .
+  .
+  .
+  describe "Home page" do
+    .
+    .
+    .
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem")
+        FactoryGirl.create(:micropost, user: user, content: "Ipsum")
+        sign_in user
+        visit root_path
+      end
+
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+      end
+
+      describe "follower/following counts" do
+        let(:other_user) { FactoryGirl.create(:user) }
+        before do
+          other_user.follow!(user)
+          visit root_path
+        end
+
+        it { should have_link("0 following", href: following_user_path(user)) }
+        it { should have_link("1 followers", href: followers_user_path(user)) }
+      end
+    end
+  end
+  .
+  .
+  .
+end
+
+#####OLD
+    describe "for signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+      before do
+        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+        sign_in user
+        visit root_path
+      end
+
+      it "should render the user's feed" do
+        user.feed.each do |item|
+          expect(page).to have_selector("li##{item.id}", text: item.content)
+        end
+      end
+    end
+
+
+
+
+
+
+Failures:
+
+  1) Static pages Home page for signed-in users follower/following counts 
+     Failure/Error: it { should have_link("0 following", href: following_user_path(user)) }
+       expected #has_link?("0 following", {:href=>"/users/61/following"}) to return true, got false
+     # ./spec/requests/static_pages_spec.rb:88:in `block (5 levels) in <top (required)>'
+
+  2) Static pages Home page for signed-in users follower/following counts 
+     Failure/Error: it { should have_link("1 followers", href: followers_user_path(user)) }
+       expected #has_link?("1 followers", {:href=>"/users/61/followers"}) to return true, got false
+     # ./spec/requests/static_pages_spec.rb:89:in `block (5 levels) in <top (required)>'
+
+Finished in 7.14 seconds
+169 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/requests/static_pages_spec.rb:88 # Static pages Home page for signed-in users follower/following counts 
+rspec ./spec/requests/static_pages_spec.rb:89 # Static pages Home page for signed-in users follower/following counts 
+
+
+
+

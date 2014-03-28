@@ -1,0 +1,40 @@
+
+Listing 11.39. The JavaScript Embedded Ruby to create a following relationship.
+subl app/views/relationships/create.js.erb
+
+$("#follow_form").html("<%= escape_javascript(render('users/unfollow')) %>")
+$("#followers").html('<%= @user.followers.count %>')
+
+
+
+
+
+
+
+Failures:
+
+  1) RelationshipsController destroying a relationship with Ajax should decrement the Relationship count
+     Failure/Error: xhr :delete, :destroy, id: relationship.id
+     ActionView::MissingTemplate:
+       Missing template relationships/destroy, application/destroy with {:locale=>[:en], :formats=>[:js, :html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "#<RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator:0xa4d4f90>"
+     # ./app/controllers/relationships_controller.rb:17:in `destroy'
+     # ./spec/controllers/relationships_controller_spec.rb:34:in `block (4 levels) in <top (required)>'
+     # ./spec/controllers/relationships_controller_spec.rb:33:in `block (3 levels) in <top (required)>'
+
+  2) RelationshipsController destroying a relationship with Ajax should respond with success
+     Failure/Error: xhr :delete, :destroy, id: relationship.id
+     ActionView::MissingTemplate:
+       Missing template relationships/destroy, application/destroy with {:locale=>[:en], :formats=>[:js, :html], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder, :coffee]}. Searched in:
+         * "#<RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator:0xa508584>"
+     # ./app/controllers/relationships_controller.rb:17:in `destroy'
+     # ./spec/controllers/relationships_controller_spec.rb:39:in `block (3 levels) in <top (required)>'
+
+Finished in 7.1 seconds
+189 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/controllers/relationships_controller_spec.rb:32 # RelationshipsController destroying a relationship with Ajax should decrement the Relationship count
+rspec ./spec/controllers/relationships_controller_spec.rb:38 # RelationshipsController destroying a relationship with Ajax should respond with success
+

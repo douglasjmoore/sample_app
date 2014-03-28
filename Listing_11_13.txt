@@ -1,0 +1,59 @@
+
+Listing 11.13. A test for unfollowing a user.
+subl spec/models/user_spec.rb
+
+require 'spec_helper'
+
+describe User do
+  .
+  .
+  .
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
+  .
+  .
+  .
+  describe "following" do
+    .
+    .
+    .
+    describe "and unfollowing" do
+      before { @user.unfollow!(other_user) }
+
+      it { should_not be_following(other_user) }
+      its(:followed_users) { should_not include(other_user) }
+    end
+  end
+end
+
+
+
+
+Failures:
+
+  1) User 
+     Failure/Error: it { should respond_to(:unfollow!) }
+       expected #<User id: nil, name: "Example User", email: "user@example.com", created_at: nil, updated_at: nil, password_digest: "$2a$04$GqsuzlRzu8NgT5NoEN/S5O4t7xER9h7b6IKXYsVPDveE...", remember_token: nil, admin: false> to respond to :unfollow!
+     # ./spec/models/user_spec.rb:27:in `block (2 levels) in <top (required)>'
+
+  2) User following and unfollowing 
+     Failure/Error: before { @user.unfollow!(other_user) }
+     NoMethodError:
+       undefined method `unfollow!' for #<User:0xcfede0c>
+     # ./spec/models/user_spec.rb:180:in `block (4 levels) in <top (required)>'
+
+  3) User following and unfollowing followed_users 
+     Failure/Error: before { @user.unfollow!(other_user) }
+     NoMethodError:
+       undefined method `unfollow!' for #<User:0xcc8bd40>
+     # ./spec/models/user_spec.rb:180:in `block (4 levels) in <top (required)>'
+
+Finished in 6.79 seconds
+164 examples, 3 failures
+
+Failed examples:
+
+rspec ./spec/models/user_spec.rb:27 # User 
+rspec ./spec/models/user_spec.rb:182 # User following and unfollowing 
+rspec ./spec/models/user_spec.rb:183 # User following and unfollowing followed_users 
+
